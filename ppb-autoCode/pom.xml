@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<parent>
+	  <groupId>com.shrc</groupId>
+	  <artifactId>public-pom</artifactId>
+	  <version>2.0.1</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ppb</groupId>
+	<artifactId>ppb-autoCode</artifactId>
+	<packaging>war</packaging>
+	<name>ppb-autoCode</name>
+	<url>http://maven.apache.org</url>
+
+	<build>
+		<finalName>ppb-autoCode</finalName>
+	</build>
+
+	<properties>
+		<active.appname>PPB-AUTOCODE</active.appname>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.locales>zh_CN</project.build.locales>
+		<junit.version>4.11</junit.version>
+		<freemarker.version>2.3.20</freemarker.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+		  <groupId>com.shrc</groupId>
+		  <artifactId>public-common</artifactId>
+		  <version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>7.0.8</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>${freemarker.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.1.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-web</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aop</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-webmvc</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.shrc.haiwaiu</groupId>
+			<artifactId>haiwaiu-dubbo-entity</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+        </dependency>
+        
+        <dependency>
+			<groupId>com.aliyun.oss</groupId>
+			<artifactId>aliyun-sdk-oss</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,57 @@
+/*公共样式*/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+fieldset, lengend, button, input, textarea, /* form elements 表单元素 */
+th, td { /* table elements 表格元素 */
+    font-family: "microsoft yahei","microsoft yahei", "Microsoft YaHei UI","Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "WenQuanYi Micro Hei", sans-serif;
+}
+/* 让非ie浏览器默认也显示垂直滚动条，防止因滚动条引起的闪烁 */
+.logo_area span{font-size:16px;}
+.logo_area .logo{background:url(./images/yjhy_logo.png) no-repeat; width:20px; height:20px; display:inline-block; vertical-align: middle}
+.online_doctors{margin-right:15px;}
+.online_doctors span{color:#fff}
+.online_doctors b{padding-left:10px; color:#fff}
+
+/*首页*/
+.index .welcome{margin-top:200px;}
+.iframe_container{position:absolute; left:0; top:32px; bottom:0; right:0;height:auto; }
+
+/*登录页面*/
+.ljhy_login{background:url('./images/login_bg.png')}
+.ljhy_login .fgt_pass{padding-left:10px;}
+.ljhy_login .login-layout{}
+.ljhy_login .main-container{padding-top:100px;}
+.ljhy_login .login_logo .app_name{font-size:22px;}
+.ljhy_login .login_logo span{vertical-align: middle}
+.ljhy_login .login_area{box-shadow: 0 1px 2px  #c6c6c6;border-radius:6px; background:#f8f8f8;}
+.ljhy_login .login_area .login-box .toolbar{border-top:none; border-radius:0 0 6px 6px;}
+.ljhy_login .login_area .widget-body{border-radius:6px; background:#f8f8f8; border:none; box-shadow: 0 1px 2px  #c6c6c6;}
+.ljhy_login .login_area .input-icon i{top:3px;}
+.ljhy_login .login_area input[type=checkbox].ace+.lbl::before{margin-right:10px;}
+
+/*电话咨询页面*/
+.calls  .query_ipt .form-group{margin-right:20px;}
+.calls  .form_til{padding-right:10px;}
+
+/*病人库*/
+.brk .brk_panel_container{}
+.brk .brk_panel{ width:100%; margin-top:15px;background:#fff; padding:20px; border:1px solid #e4e4e4;border-radius:4px;}
+.brk .brk_panel:hover{ border: 1px solid #438eb9 !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(67, 142, 185, 0.6);}
+.brk .brk_panel .per_img{float:left;}
+.brk .brk_panel .per_info{float:left; list-style: none; margin:0 0 0 15px;}
+.brk .brk_panel .per_info li{padding-bottom:3px;}
+.brk .brk_panel .per_info li .info_name{padding-right:6px; width:50px; display:inline-block}
+.brk .brk_panel .per_info li .til{ font-size:15px;}
+.brk .brk_panel .per_info li.top_line{padding-bottom:10px; width:100%}
+
+/*我的账户*/
+.wdzh .row_item{margin-bottom:15px;}
+.wdzh .gender input[type=radio].ace + .lbl::before{margin-right:5px;}
+/*患者信息*/
+.hzxx .user_info{margin-top:15px;}
+.hzxx .hzxx_panel{}
+.hzxx .hzxx_panel ul{margin:0; padding:0; list-style: none; float:left; margin-left:15px;}
+.hzxx .hzxx_panel ul .info_name{display:inline-block;padding:10px 0 10px ;}
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="  
+		http://www.springframework.org/schema/beans  
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+		http://www.springframework.org/schema/mvc  
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd  
+		http://www.springframework.org/schema/context  
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	
+
+    <!-- 引入配置文件 -->
+    <bean id="propertyConfigurer" class="com.shrc.common.spring.config.DBPlaceholderConfigurer"> 
+		<property name="appName"  value="${active.appname}"/>
+		<property name="profileName"  value="${active.profilename}"/>
+		<property name="driverClass"  value="${active.driverClass}"/>
+		<property name="name"  value="${active.name}"/>
+		<property name="pwd"  value="${active.pwd}"/>
+		<property name="url"  value="${active.url}"/>
+		<property name="createPropertyFile"  value="false"/>
+		<property name="autoReload" value="false" />
+		<property name="locations">
+			<list>
+				<value>classpath*:config/${active.profilename}/*.properties</value>
+			</list>
+		</property>
+	</bean>
+    
+	<import resource="classpath:spring/spring_redis.xml" />
+	<import resource="classpath:spring/spring_servlet.xml" />
+	<import resource="classpath:spring/spring_interceptor.xml" />
+</beans>  
