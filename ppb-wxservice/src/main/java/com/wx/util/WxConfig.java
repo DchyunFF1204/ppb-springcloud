@@ -15,5 +15,11 @@ public class WxConfig {
 	
 	@Value("${wxAppAse}")
 	public String WX_APP_ASE;
+	
+	@Value("${wxRedisHost}")
+	public String WX_REDIS_HOST;
+	
+	@Value("${wxRedisPort}")
+	public int WX_REIDS_PORT;
 
 }

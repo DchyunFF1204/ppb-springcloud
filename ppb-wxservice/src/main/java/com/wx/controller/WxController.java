@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
+import me.chanjar.weixin.mp.api.WxMpInRedisConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
@@ -15,6 +15,8 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import redis.clients.jedis.Jedis;
 
 import com.wx.util.WxConfig;
 
@@ -26,7 +28,7 @@ import com.wx.util.WxConfig;
  */
 @RestController
 @RequestMapping("/wx/core")
-public class WxController extends WxConfig{
+public class WxController extends WxConfig {
 
 	/**
 	 * 微信接口入口
@@ -40,7 +42,9 @@ public class WxController extends WxConfig{
 		String nonce = request.getParameter("nonce");
 		String timestamp = request.getParameter("timestamp");
 		WxMpService wxMpService = new WxMpServiceImpl();
-		WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
+		WxMpInRedisConfigStorage config = new WxMpInRedisConfigStorage();
+		Jedis jedis = new Jedis(WX_REDIS_HOST, WX_REIDS_PORT);
+		config.setJedis(jedis);
 		config.setAppId(WX_APP_ID); // 设置微信公众号的appid
 		config.setSecret(WX_APP_SECRET); // 设置微信公众号的app corpSecret
 		config.setToken(WX_APP_TOKEN); // 设置微信公众号的token
