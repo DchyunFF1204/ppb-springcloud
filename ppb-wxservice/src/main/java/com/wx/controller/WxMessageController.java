@@ -51,9 +51,9 @@ public class WxMessageController {
 	public Map<String,Object> sendTemplateMsg(@ModelAttribute WxMpTemplateMessage templateMessage) throws WxErrorException{
 		Map<String,Object> result = new HashMap<String, Object>();
 		WxMpTemplateMsgService wxMpTemplateMsgService = WxMpServiceInstance.getInstance().getWxMpService().getTemplateMsgService();
-		String b = wxMpTemplateMsgService.sendTemplateMsg(templateMessage);
+		String msg = wxMpTemplateMsgService.sendTemplateMsg(templateMessage);
 		result.put("status", true);
-		result.put("data", b);
+		result.put("data", msg);
 		return result;
 	}
 	
