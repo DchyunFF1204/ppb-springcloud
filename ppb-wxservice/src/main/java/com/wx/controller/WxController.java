@@ -2,13 +2,12 @@ package com.wx.controller;
 
 import java.io.IOException;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import me.chanjar.weixin.mp.api.WxMpInRedisConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 
@@ -16,9 +15,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import redis.clients.jedis.Jedis;
-
+import com.wx.MessageService;
 import com.wx.util.WxConfig;
+import com.wx.util.WxMpServiceInstance;
 
 /**
  * @author daizy
@@ -27,30 +26,26 @@ import com.wx.util.WxConfig;
  *
  */
 @RestController
-@RequestMapping("/wx/core")
+@RequestMapping("/wechat/core")
 public class WxController extends WxConfig {
+	
+	@Resource
+	private MessageService messageService;
 
 	/**
 	 * 微信接口入口
 	 * @throws IOException 
 	 */
-	@RequestMapping("/init")
+	@RequestMapping("/connect")
 	public void init(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
 		String signature = request.getParameter("signature");
 		String nonce = request.getParameter("nonce");
 		String timestamp = request.getParameter("timestamp");
-		WxMpService wxMpService = new WxMpServiceImpl();
-		WxMpInRedisConfigStorage config = new WxMpInRedisConfigStorage();
-		Jedis jedis = new Jedis(WX_REDIS_HOST, WX_REIDS_PORT);
-		config.setJedis(jedis);
-		config.setAppId(WX_APP_ID); // 设置微信公众号的appid
-		config.setSecret(WX_APP_SECRET); // 设置微信公众号的app corpSecret
-		config.setToken(WX_APP_TOKEN); // 设置微信公众号的token
-		config.setAesKey(WX_APP_ASE); // 设置微信公众号的EncodingAESKey
-		wxMpService.setWxMpConfigStorage(config);
-		WxMpMessageRouter wxMpMessageRouter = new WxMpMessageRouter(wxMpService);
+		WxMpServiceInstance ins = WxMpServiceInstance.getInstance();
+		WxMpService wxMpService = ins.getWxMpService();
+		WxMpMessageRouter wxMpMessageRouter = ins.getWxMpMessageRouter();
 		
 		if (!wxMpService.checkSignature(timestamp, nonce, signature)) {
 			// 消息签名不正确，说明不是公众平台发过来的消息
