@@ -12,6 +12,7 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,21 +32,21 @@ public class WxController extends WxConfig {
 	
 	@Resource
 	private MessageService messageService;
-
+	
 	/**
 	 * 微信接口入口
 	 * @throws IOException 
 	 */
 	@RequestMapping("/connect")
 	public void init(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		System.out.println(WX_APP_ID);
 		response.setContentType("text/html;charset=utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
 		String signature = request.getParameter("signature");
 		String nonce = request.getParameter("nonce");
 		String timestamp = request.getParameter("timestamp");
-		WxMpServiceInstance ins = WxMpServiceInstance.getInstance();
-		WxMpService wxMpService = ins.getWxMpService();
-		WxMpMessageRouter wxMpMessageRouter = ins.getWxMpMessageRouter();
+		WxMpService wxMpService =  WxMpServiceInstance.getInstance().getWxMpService();
+		WxMpMessageRouter wxMpMessageRouter = WxMpServiceInstance.getInstance().getWxMpMessageRouter();
 		
 		if (!wxMpService.checkSignature(timestamp, nonce, signature)) {
 			// 消息签名不正确，说明不是公众平台发过来的消息

@@ -8,6 +8,7 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import redis.clients.jedis.Jedis;
 
@@ -25,10 +26,11 @@ import com.wx.util.WxConfig;
  * 单例模式
  *
  */
+@Component
 public class WxMpServiceInstance extends WxConfig {
 
 	private WxMpService wxMpService;
-	private WxMpConfigStorage wxMpConfigStorage;
+	private WxMpInRedisConfigStorage wxMpConfigStorage;
 	private WxMpMessageRouter wxMpMessageRouter;
 	private static WxMpServiceInstance instance = null;
 	
@@ -61,13 +63,13 @@ public class WxMpServiceInstance extends WxConfig {
 		/*InputStream inputStream = WxMpServiceInstance.class
 				.getResourceAsStream("/config/weixin.xml");
 		wxMpConfigStorage = WxMpXMLInMemoryConfigStorage.fromXml(inputStream);*/
-		WxMpInRedisConfigStorage config = new WxMpInRedisConfigStorage();
+		wxMpConfigStorage = new WxMpInRedisConfigStorage();
 		Jedis jedis = new Jedis(WX_REDIS_HOST, WX_REIDS_PORT);
-		config.setJedis(jedis);
-		config.setAppId(WX_APP_ID); // 设置微信公众号的appid
-		config.setSecret(WX_APP_SECRET); // 设置微信公众号的app corpSecret
-		config.setToken(WX_APP_TOKEN); // 设置微信公众号的token
-		config.setAesKey(WX_APP_ASE); // 设置微信公众号的EncodingAESKey
+		wxMpConfigStorage.setJedis(jedis);
+		wxMpConfigStorage.setAppId(WX_APP_ID); // 设置微信公众号的appid
+		wxMpConfigStorage.setSecret(WX_APP_SECRET); // 设置微信公众号的app corpSecret
+		wxMpConfigStorage.setToken(WX_APP_TOKEN); // 设置微信公众号的token
+		wxMpConfigStorage.setAesKey(WX_APP_ASE); // 设置微信公众号的EncodingAESKey
 		wxMpService.setWxMpConfigStorage(wxMpConfigStorage);
 		wxMpMessageRouter = new WxMpMessageRouter(wxMpService);
 		wxMpMessageRouter

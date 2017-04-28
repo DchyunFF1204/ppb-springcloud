@@ -58,8 +58,8 @@ public class WxMenuController {
 	 * @return
 	 * @throws WxErrorException
 	 */
-	@RequestMapping("/menuDelete")
-	public Map<String,Object> menuDelete(@ModelAttribute WxMenu menu) throws WxErrorException{
+	@RequestMapping("/menuCreate")
+	public Map<String,Object> menuCreate(@ModelAttribute WxMenu menu) throws WxErrorException{
 		Map<String,Object> result = new HashMap<String, Object>();
 		WxMpService wxMpService = WxMpServiceInstance.getInstance().getWxMpService();
 		String menuId = wxMpService.getMenuService().menuCreate(menu);
