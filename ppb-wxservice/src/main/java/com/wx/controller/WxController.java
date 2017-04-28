@@ -15,9 +15,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wx.MessageService;
+import com.wx.service.MessageService;
+import com.wx.service.WxMpServiceInstance;
 import com.wx.util.WxConfig;
-import com.wx.util.WxMpServiceInstance;
 
 /**
  * @author daizy
