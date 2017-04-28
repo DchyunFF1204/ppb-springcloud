@@ -31,6 +31,7 @@ public class WxQrcodeController {
 	 * @param type  tmp 临时    last 永久
 	 * @throws WxErrorException 
 	 */
+	@RequestMapping("/qrCodePicture")
 	public Map<String,Object> qrCodePicture(String scene_str,String type) throws WxErrorException{
 		Map<String,Object> result = new HashMap<String, Object>();
 		WxMpService wxMpService = WxMpServiceInstance.getInstance().getWxMpService();

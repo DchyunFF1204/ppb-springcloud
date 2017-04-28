@@ -62,6 +62,12 @@
             <artifactId>weixin-java-common</artifactId>
             <version>2.6.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-pay</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+        
 	</dependencies>
 	
 	<dependencyManagement>
