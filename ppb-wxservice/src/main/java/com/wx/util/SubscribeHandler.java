@@ -13,7 +13,6 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlOutNewsMessage;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
@@ -27,7 +26,6 @@ import com.google.gson.Gson;
 @Service
 public class SubscribeHandler implements WxMpMessageHandler {
 	
-	@Value("${wxDomain}")
 	private String wxDomain;
 
 	@Override

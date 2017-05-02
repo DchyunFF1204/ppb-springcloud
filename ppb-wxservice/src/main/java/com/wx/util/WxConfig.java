@@ -1,37 +1,108 @@
 package com.wx.util;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
+@ConfigurationProperties(prefix="wx")
 public class WxConfig {
 	
-	@Value("${wxAppId}")
-	public String WX_APP_ID;
+	public String appId;
 	
-	@Value("${wxAppSecret}")
-	public String WX_APP_SECRET;
+	public String appSecret;
 	
-	@Value("${wxAppToken}")
-	public String WX_APP_TOKEN;
+	public String appToken;
 	
-	@Value("${wxAppAse}")
-	public String WX_APP_ASE;
+	public String appAse;
 	
-	@Value("${wxAppMchId}")
-	public String WX_APP_MCH_ID;
+	public String appMchId;
 	
-	@Value("${wxAppNotifyUrl}")
-	public String WX_APP_NOTIFY_URL;
+	public String appNotifyUrl;
 	
-	@Value("${wxAppKeyPath}")
-	public String WX_APP_KEY_PATH;
+	public String appKeyPath;
 	
-	@Value("${wxAppMchKey}")
-	public String WX_APP_MCH_KEY;
+	public String appMchKey;
 	
-	@Value("${wxRedisHost}")
-	public String WX_REDIS_HOST;
+	public String redisHost;
 	
-	@Value("${wxRedisPort}")
-	public int WX_REIDS_PORT;
+	public int redisPort;
+
+	public String getAppId() {
+		return appId;
+	}
+
+	public void setAppId(String appId) {
+		this.appId = appId;
+	}
+
+	public String getAppSecret() {
+		return appSecret;
+	}
+
+	public void setAppSecret(String appSecret) {
+		this.appSecret = appSecret;
+	}
+
+	public String getAppToken() {
+		return appToken;
+	}
+
+	public void setAppToken(String appToken) {
+		this.appToken = appToken;
+	}
+
+	public String getAppAse() {
+		return appAse;
+	}
+
+	public void setAppAse(String appAse) {
+		this.appAse = appAse;
+	}
+
+	public String getAppMchId() {
+		return appMchId;
+	}
+
+	public void setAppMchId(String appMchId) {
+		this.appMchId = appMchId;
+	}
+
+	public String getAppNotifyUrl() {
+		return appNotifyUrl;
+	}
+
+	public void setAppNotifyUrl(String appNotifyUrl) {
+		this.appNotifyUrl = appNotifyUrl;
+	}
+
+	public String getAppKeyPath() {
+		return appKeyPath;
+	}
+
+	public void setAppKeyPath(String appKeyPath) {
+		this.appKeyPath = appKeyPath;
+	}
+
+	public String getAppMchKey() {
+		return appMchKey;
+	}
+
+	public void setAppMchKey(String appMchKey) {
+		this.appMchKey = appMchKey;
+	}
+
+	public String getRedisHost() {
+		return redisHost;
+	}
+
+	public void setRedisHost(String redisHost) {
+		this.redisHost = redisHost;
+	}
+
+	public int getRedisPort() {
+		return redisPort;
+	}
+
+	public void setRedisPort(int redisPort) {
+		this.redisPort = redisPort;
+	}
 
 }
