@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import me.chanjar.weixin.common.exception.WxErrorException;
 
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +32,9 @@ import com.wx.service.WxPayServiceInstance;
 @RequestMapping("/wechat/pay")
 public class WxPayController {
 	
+	@Autowired
+    private Environment env;
+	
 	/**
 	 * 微信统一下单
 	 * JSAPI--公众号支付、NATIVE--原生扫码支付、APP--app支付，统一下单接口trade_type的传参可参考这里
@@ -41,7 +46,7 @@ public class WxPayController {
 	public Map<String,Object> unifiedOrder(@ModelAttribute WxPayUnifiedOrderRequest orderRequest) throws WxErrorException{
 		Map<String,Object> result = new HashMap<String, Object>();
 		//orderRequest.setTotalFee(WxPayBaseRequest.yuanToFee(order.getTotalFee()));//元转成分
-		WxPayService wxPayService = WxPayServiceInstance.getInstance().getWxPayService();
+		WxPayService wxPayService = WxPayServiceInstance.getInstance(env).getWxPayService();
 		wxPayService.getConfig().setTradeType(orderRequest.getTradeType());
 		Map<String, String> udata = wxPayService.getPayInfo(orderRequest);
 		result.put("status", true);
@@ -59,7 +64,7 @@ public class WxPayController {
 	 */
 	@RequestMapping("/payNotify")
 	public String payNotify(HttpServletRequest request, HttpServletResponse response) throws IOException, WxErrorException{
-		WxPayService wxPayService = WxPayServiceInstance.getInstance().getWxPayService();
+		WxPayService wxPayService = WxPayServiceInstance.getInstance(env).getWxPayService();
 		String xmlResult = IOUtils.toString(request.getInputStream(), request.getCharacterEncoding());
 		WxPayOrderNotifyResult result = wxPayService.getOrderNotifyResult(xmlResult);
 		// 校验回写数据

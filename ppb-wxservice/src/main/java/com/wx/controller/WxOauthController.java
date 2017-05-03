@@ -8,6 +8,8 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +26,9 @@ import com.wx.service.WxMpServiceInstance;
 @RequestMapping("/wechat/oauth")
 public class WxOauthController {
 	
+	@Autowired
+    private Environment env;
+	
 	/**
 	 * 获取网页授权链接
 	 * @param redirectURI    用户授权完成后的重定向链接，无需urlencode
@@ -34,7 +39,7 @@ public class WxOauthController {
 	@RequestMapping("/oauth2buildAuthorizationUrl")
 	public Map<String,Object> oauth2buildAuthorizationUrl(String redirectURI, String scope, String state){
 		Map<String,Object> result = new HashMap<String, Object>();
-		WxMpService wxMpService = WxMpServiceInstance.getInstance().getWxMpService();
+		WxMpService wxMpService = WxMpServiceInstance.getInstance(env).getWxMpService();
 		String url = wxMpService.oauth2buildAuthorizationUrl(redirectURI, scope, state);
 		result.put("status", true);
 		result.put("data", url);
@@ -50,7 +55,7 @@ public class WxOauthController {
 	@RequestMapping("/oauth2getUserInfo")
 	public Map<String,Object> oauth2getUserInfo(String code) throws WxErrorException{
 		Map<String,Object> result = new HashMap<String, Object>();
-		WxMpService wxMpService = WxMpServiceInstance.getInstance().getWxMpService();
+		WxMpService wxMpService = WxMpServiceInstance.getInstance(env).getWxMpService();
 		WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
 		boolean valid = wxMpService.oauth2validateAccessToken(wxMpOAuth2AccessToken);
 		// 验证token 是否有效

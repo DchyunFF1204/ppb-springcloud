@@ -11,11 +11,12 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wx.service.WxMpServiceInstance;
-import com.wx.util.WxConfig;
 
 /**
  * @author daizy
@@ -25,7 +26,10 @@ import com.wx.util.WxConfig;
  */
 @RestController
 @RequestMapping("/wechat/core")
-public class WxController extends WxConfig {
+public class WxController {
+	
+	@Autowired
+    private Environment env;
 	
 	/**
 	 * 微信接口入口
@@ -38,8 +42,8 @@ public class WxController extends WxConfig {
 		String signature = request.getParameter("signature");
 		String nonce = request.getParameter("nonce");
 		String timestamp = request.getParameter("timestamp");
-		WxMpService wxMpService =  WxMpServiceInstance.getInstance().getWxMpService();
-		WxMpMessageRouter wxMpMessageRouter = WxMpServiceInstance.getInstance().getWxMpMessageRouter();
+		WxMpService wxMpService =  WxMpServiceInstance.getInstance(env).getWxMpService();
+		WxMpMessageRouter wxMpMessageRouter = WxMpServiceInstance.getInstance(env).getWxMpMessageRouter();
 		
 		if (!wxMpService.checkSignature(timestamp, nonce, signature)) {
 			// 消息签名不正确，说明不是公众平台发过来的消息

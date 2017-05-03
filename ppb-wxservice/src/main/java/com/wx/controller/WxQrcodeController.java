@@ -8,6 +8,8 @@ import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpQrCodeTicket;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,9 @@ import com.wx.service.WxMpServiceInstance;
 @RequestMapping("/wechat/qrcode")
 public class WxQrcodeController {
 	
+	@Autowired
+    private Environment env;
+	
 	/**
 	 * 
 	 * 生成微信二维码
@@ -34,7 +39,7 @@ public class WxQrcodeController {
 	@RequestMapping("/qrCodePicture")
 	public Map<String,Object> qrCodePicture(String scene_str,String type) throws WxErrorException{
 		Map<String,Object> result = new HashMap<String, Object>();
-		WxMpService wxMpService = WxMpServiceInstance.getInstance().getWxMpService();
+		WxMpService wxMpService = WxMpServiceInstance.getInstance(env).getWxMpService();
 		WxMpQrCodeTicket ticket = null;
 		switch (type) {
 		case "tmp":

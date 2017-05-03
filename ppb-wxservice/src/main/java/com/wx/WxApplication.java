@@ -2,9 +2,6 @@ package com.wx;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-
-import com.wx.util.WxConfig;
 
 /**
  * @author daizy
@@ -13,7 +10,6 @@ import com.wx.util.WxConfig;
  *
  */
 @SpringBootApplication
-@EnableConfigurationProperties({WxConfig.class})
 public class WxApplication {
 
 	public static void main(String[] args) {

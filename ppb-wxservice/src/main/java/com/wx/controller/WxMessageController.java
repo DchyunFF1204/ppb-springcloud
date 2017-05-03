@@ -9,6 +9,8 @@ import me.chanjar.weixin.mp.api.WxMpTemplateMsgService;
 import me.chanjar.weixin.mp.bean.kefu.WxMpKefuMessage;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +27,9 @@ import com.wx.service.WxMpServiceInstance;
 @RequestMapping("/wechat/message")
 public class WxMessageController {
 	
+	@Autowired
+    private Environment env;
+	
 	/**
 	 * 发送客服消息
 	 * @param message  
@@ -34,7 +39,7 @@ public class WxMessageController {
 	@RequestMapping("/sendKefuMessage")
 	public Map<String,Object> sendKefuMessage(@ModelAttribute WxMpKefuMessage message) throws WxErrorException{
 		Map<String,Object> result = new HashMap<String, Object>();
-		WxMpKefuService kefuService = WxMpServiceInstance.getInstance().getWxMpService().getKefuService();
+		WxMpKefuService kefuService = WxMpServiceInstance.getInstance(env).getWxMpService().getKefuService();
 		boolean b = kefuService.sendKefuMessage(message);
 		result.put("status", b);
 		result.put("message", b==true?"消息发送成功":"消息发送失败");
@@ -50,7 +55,7 @@ public class WxMessageController {
 	@RequestMapping("/sendTemplateMsg")
 	public Map<String,Object> sendTemplateMsg(@ModelAttribute WxMpTemplateMessage templateMessage) throws WxErrorException{
 		Map<String,Object> result = new HashMap<String, Object>();
-		WxMpTemplateMsgService wxMpTemplateMsgService = WxMpServiceInstance.getInstance().getWxMpService().getTemplateMsgService();
+		WxMpTemplateMsgService wxMpTemplateMsgService = WxMpServiceInstance.getInstance(env).getWxMpService().getTemplateMsgService();
 		String msg = wxMpTemplateMsgService.sendTemplateMsg(templateMessage);
 		result.put("status", true);
 		result.put("data", msg);

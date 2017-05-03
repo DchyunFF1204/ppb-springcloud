@@ -8,6 +8,8 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import me.chanjar.weixin.mp.bean.result.WxMpUserList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,9 @@ import com.wx.service.WxMpServiceInstance;
 @RequestMapping("/wechat/user")
 public class WxUserController {
 	
+	@Autowired
+    private Environment env;
+	
 	/**
 	 * 通过openid 获取用户信息   默认zh_CN
 	 * @param openid
@@ -32,7 +37,7 @@ public class WxUserController {
 	@RequestMapping("/userInfo")
 	public Map<String,Object> userInfo(String openid) throws WxErrorException{
 		Map<String,Object> result = new HashMap<String, Object>();
-		WxMpService wxMpService = WxMpServiceInstance.getInstance().getWxMpService();
+		WxMpService wxMpService = WxMpServiceInstance.getInstance(env).getWxMpService();
 		WxMpUser user = wxMpService.getUserService().userInfo(openid);
 		result.put("status", true);
 		result.put("data", user);
@@ -49,7 +54,7 @@ public class WxUserController {
 	@RequestMapping("/userList")
 	public Map<String,Object> userList(String next_openid) throws WxErrorException{
 		Map<String,Object> result = new HashMap<String, Object>();
-		WxMpService wxMpService = WxMpServiceInstance.getInstance().getWxMpService();
+		WxMpService wxMpService = WxMpServiceInstance.getInstance(env).getWxMpService();
 		WxMpUserList userList = wxMpService.getUserService().userList(next_openid);
 		result.put("status", true);
 		result.put("data", userList);

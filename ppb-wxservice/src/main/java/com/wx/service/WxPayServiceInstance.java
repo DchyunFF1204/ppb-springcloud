@@ -1,11 +1,10 @@
 package com.wx.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 import com.github.binarywang.wxpay.config.WxPayConfig;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
-import com.wx.util.WxConfig;
 
 /**
  * @author daizy
@@ -15,18 +14,15 @@ import com.wx.util.WxConfig;
  * 单例模式
  *
  */
-public class WxPayServiceInstance extends WxConfig {
+public class WxPayServiceInstance {
 	
-	@Autowired
-	private WxConfig wxConfig;
-
 	private WxPayService wxPayService;
 	private static WxPayServiceInstance instance = null;
 	
-	public static WxPayServiceInstance getInstance() {
+	public static WxPayServiceInstance getInstance(Environment env) {
 		if (instance == null) {
 			try {
-				instance = new WxPayServiceInstance();
+				instance = new WxPayServiceInstance(env);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -34,14 +30,14 @@ public class WxPayServiceInstance extends WxConfig {
 		return instance;
 	}
 
-	private WxPayServiceInstance() throws Exception {
+	private WxPayServiceInstance(Environment env) throws Exception {
 		wxPayService = new WxPayServiceImpl();
 		WxPayConfig wconf = new WxPayConfig();
-		wconf.setAppId(wxConfig.getAppId()); // appid
-		wconf.setMchId(wxConfig.getAppMchId()); //mchid
-		wconf.setKeyPath(wxConfig.getAppMchId());// 证书路径
-		wconf.setMchKey(wxConfig.getAppMchKey()); // mchkey
-		wconf.setNotifyUrl(wxConfig.getAppNotifyUrl()); // 异步通知
+		wconf.setAppId(env.getProperty("wx.appId")); // appid
+		wconf.setMchId(env.getProperty("wx.appMchId")); //mchid
+		wconf.setKeyPath(env.getProperty("wx.appKeyPath"));// 证书路径
+		wconf.setMchKey(env.getProperty("wx.appMchKey")); // mchkey
+		wconf.setNotifyUrl(env.getProperty("wx.appNotifyUrl")); // 异步通知
 		wxPayService.setConfig(wconf);
 	}
 
