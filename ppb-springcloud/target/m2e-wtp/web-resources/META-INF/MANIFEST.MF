@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-Title: ppb-springcloud
+Implementation-Version: 1.0.0
+Implementation-Vendor-Id: com.ppb
+Build-Jdk: 1.6.0_24
+Built-By: daizy
+Created-By: Maven Integration for Eclipse
+
