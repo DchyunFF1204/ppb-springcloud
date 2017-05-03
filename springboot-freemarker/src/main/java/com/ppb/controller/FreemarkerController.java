@@ -9,7 +9,7 @@ public class FreemarkerController {
 	
 	@RequestMapping("/intoTestPage")
 	public String intoTestPage(Model model){
-		model.addAttribute("name", "hello springboot-freemarker!");
+		model.addAttribute("name", "你好 springboot-freemarker!");
 		return "test";
 	}
 
