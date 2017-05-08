@@ -25,7 +25,6 @@ import com.wx.service.WxMpServiceInstance;
  *
  */
 @RestController
-@RequestMapping("/wechat/core")
 public class WxController {
 	
 	@Autowired
@@ -35,7 +34,7 @@ public class WxController {
 	 * 微信接口入口
 	 * @throws IOException 
 	 */
-	@RequestMapping("/connect")
+	@RequestMapping("/wechat")
 	public void init(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);

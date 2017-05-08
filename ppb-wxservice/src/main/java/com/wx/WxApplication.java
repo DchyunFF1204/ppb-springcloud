@@ -1,6 +1,5 @@
 package com.wx;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
@@ -11,7 +10,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  *
  */
 @SpringBootApplication
-@MapperScan("com.wx.mapper")
 public class WxApplication {
 
 	public static void main(String[] args) {
