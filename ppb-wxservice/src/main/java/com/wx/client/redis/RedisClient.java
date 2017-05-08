@@ -15,7 +15,7 @@ import redis.clients.jedis.ShardedJedisPool;
  *
  */
 @Component
-public class RedisClient {
+public class RedisClient{
 	
     private static final Logger LOGGER    = LoggerFactory.getLogger(RedisClient.class);
 
@@ -25,7 +25,7 @@ public class RedisClient {
     @Autowired
     private RedisProperties     redisProperties;
 
-    private static final String KEY_SPLIT = ":"; //用于隔开缓存前缀与缓存键值 
+    private static final String KEY_SPLIT = ""; //用于隔开缓存前缀与缓存键值 
     
     public ShardedJedis getResource() {
 		return shardedJedisPool.getResource();
