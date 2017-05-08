@@ -3,6 +3,8 @@ package com.wx;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import redis.clients.jedis.JedisPoolConfig;
+
 @Component
 @ConfigurationProperties(prefix = "redis.cache")
 public class RedisProperties {
@@ -11,7 +13,17 @@ public class RedisProperties {
     private String clusterNodes;
     private int    commandTimeout;
     
-    public int getExpireSeconds() {
+    private JedisPoolConfig jedisPoolConfig;
+    
+    public JedisPoolConfig getJedisPoolConfig() {
+		return jedisPoolConfig;
+	}
+
+	public void setJedisPoolConfig(JedisPoolConfig jedisPoolConfig) {
+		this.jedisPoolConfig = jedisPoolConfig;
+	}
+
+	public int getExpireSeconds() {
         return expireSeconds;
     }
 

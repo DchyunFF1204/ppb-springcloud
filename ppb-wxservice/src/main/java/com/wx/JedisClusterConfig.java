@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisShardInfo;
 import redis.clients.jedis.ShardedJedisPool;
 
@@ -33,8 +32,7 @@ public class JedisClusterConfig {
 			String port = split[1];
 			list.add(new JedisShardInfo(ip, Integer.parseInt(port)));
 		}
-		JedisPoolConfig jcg = new JedisPoolConfig();
-		ShardedJedisPool pool = new ShardedJedisPool(jcg, list);
+		ShardedJedisPool pool = new ShardedJedisPool(redisProperties.getJedisPoolConfig(), list);
         return pool;
     }
 
