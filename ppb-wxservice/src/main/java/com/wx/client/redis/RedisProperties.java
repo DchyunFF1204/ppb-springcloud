@@ -1,4 +1,4 @@
-package com.wx;
+package com.wx.client.redis;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

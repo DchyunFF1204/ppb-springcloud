@@ -1,4 +1,4 @@
-package com.wx;
+package com.wx.client.redis;
 
 import java.util.ArrayList;
 import java.util.List;
