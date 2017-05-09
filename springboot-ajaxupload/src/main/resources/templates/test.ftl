@@ -29,7 +29,7 @@
 </div>
 
 </body>
-<script type="text/javascript" src="../static/jquery-1.10.2.min.js?ver=1"></script>
+<script type="text/javascript" src="${mainDomain}/static/jquery-1.10.2.min.js?ver=1"></script>
 <script>
  	var myForm=new FormData();
     function onFormPost(){
