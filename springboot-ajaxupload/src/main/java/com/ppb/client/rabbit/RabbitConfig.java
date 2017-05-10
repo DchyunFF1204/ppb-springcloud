@@ -1,4 +1,4 @@
-package com.ppb.client;
+package com.ppb.client.rabbit;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;

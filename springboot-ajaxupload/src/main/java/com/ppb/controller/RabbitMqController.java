@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ppb.client.Sender;
+import com.ppb.client.rabbit.Sender;
 
 @RestController
 public class RabbitMqController {

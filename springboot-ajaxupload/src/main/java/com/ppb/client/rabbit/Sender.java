@@ -1,4 +1,4 @@
-package com.ppb.client;
+package com.ppb.client.rabbit;
 
 import java.util.Date;
 

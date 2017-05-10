@@ -1,4 +1,4 @@
-package com.ppb.client;
+package com.ppb.client.rabbit;
 
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

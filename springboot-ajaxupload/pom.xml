@@ -36,15 +36,40 @@
 			<scope>test</scope>
 		</dependency>
 		
+        
+		<!-- mq -->
 		<dependency>  
 			<groupId>org.springframework.boot</groupId>  
 			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
+		
+		<dependency>
+	        <groupId>io.projectreactor</groupId>
+	        <artifactId>reactor-core</artifactId>
+	    </dependency>
+	    
+	    <dependency>
+	        <groupId>io.projectreactor</groupId>
+	        <artifactId>reactor-net</artifactId>
+	    </dependency>
+	
+	     <dependency>
+	        <groupId>io.netty</groupId>
+	        <artifactId>netty-all</artifactId>
+	        <version>4.0.30.Final</version>
+	    </dependency>
+		
+	    
 		<!-- 引入freeMarker的依赖包. -->
 		<dependency>
 	        <groupId>org.springframework.boot</groupId>  
 	        <artifactId>spring-boot-starter-freemarker</artifactId>
 	    </dependency>
+	    <!-- websocket -->
+	    <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
 	    
 	    <dependency>
 			<groupId>org.apache.commons</groupId>
