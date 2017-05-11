@@ -22,13 +22,15 @@
         stompClient.connect({}, function(frame) {//3
             setConnected(true);
             console.log('开始进行连接Connected: ' + frame);
-            stompClient.subscribe('/topic/greetings', function(respnose){ //4
-				console.log(JSON.parse(respnose.body));
-                showResponse(JSON.parse(respnose.body).name);
+			// 全局订阅
+            stompClient.subscribe('/queue/greetings', function(respnose){ //4
+				//console.log(respnose);
+                //showResponse(respnose.body);
             });
-			stompClient.subscribe('/app/macro', function(respnose){ //4
-				console.log(response);
-                showResponse(response.content);
+			// 私人订阅
+			stompClient.subscribe("/queue/message1", function(respnose){ //4
+				console.log("res="+JSON.parse(respnose.body));
+                showResponse(JSON.parse(respnose.body).message);
             });
         });
     }
@@ -44,8 +46,7 @@
 
     function sendName() {
         var name = $('#name').val();
-		console.log( "canshu "+JSON.stringify({ 'name': name }));
-        stompClient.send("/app/hello", {}, JSON.stringify({ 'name': name }));//5
+        stompClient.send("/app/message", {}, JSON.stringify({ 'userId': 2,'message':'1发送的消息' }));//5
     }
 
     function showResponse(message) {

@@ -31,8 +31,8 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
      */ 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
-		//config.enableSimpleBroker("/topic","/user");    默认内存代理 
-		config.enableStompBrokerRelay("/queue", "/user")
+		//config.enableSimpleBroker("/topic","/user");   //默认内存代理 
+		config.enableStompBrokerRelay("/topic","/queue")
 			.setRelayHost("192.168.0.51")  // rabbitmq 代理
 	        .setRelayPort(61613)
 			.setClientLogin("test")  
@@ -40,7 +40,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 			.setSystemHeartbeatSendInterval(5000)
 			.setSystemHeartbeatReceiveInterval(4000);
         config.setApplicationDestinationPrefixes("/app");  
-        config.setUserDestinationPrefix("/user/");
+        //config.setUserDestinationPrefix("/user");
        
 	}
 

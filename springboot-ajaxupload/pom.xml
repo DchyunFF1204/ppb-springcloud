@@ -36,7 +36,6 @@
 			<scope>test</scope>
 		</dependency>
 		
-        
 		<!-- mq -->
 		<dependency>  
 			<groupId>org.springframework.boot</groupId>  
@@ -58,6 +57,11 @@
 	        <artifactId>netty-all</artifactId>
 	        <version>4.0.30.Final</version>
 	    </dependency>
+	    
+	    <dependency>  
+		    <groupId>com.fasterxml.jackson.core</groupId>  
+		    <artifactId>jackson-databind</artifactId>  
+		</dependency>  
 		
 	    
 		<!-- 引入freeMarker的依赖包. -->
