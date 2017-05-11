@@ -1,5 +1,6 @@
 package com.ppb;
 
+import com.mongodb.WriteResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,11 @@ public class MongodbController {
     public User addUser(User user) {
         mongoTemplate.save(user);
         return user;
+    }
+
+    @RequestMapping("/delUser")
+    public WriteResult delUser(User user){
+        return mongoTemplate.remove(query(where("name").is(user.getName())),"user");
     }
 
 }
