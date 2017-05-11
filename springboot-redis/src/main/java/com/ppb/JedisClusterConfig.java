@@ -23,7 +23,7 @@ import java.util.List;
 @EnableCaching // 启用缓存
 public class JedisClusterConfig  extends CachingConfigurerSupport{
 
-	@Autowired
+    @Autowired
     private RedisProperties redisProperties;
 	
 
