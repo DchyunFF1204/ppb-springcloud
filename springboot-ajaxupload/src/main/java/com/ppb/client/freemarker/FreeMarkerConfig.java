@@ -1,4 +1,4 @@
-package com.ppb;
+package com.ppb.client.freemarker;
 
 import java.util.HashMap;
 import java.util.Map;
