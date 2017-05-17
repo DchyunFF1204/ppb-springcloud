@@ -1,12 +1,13 @@
 package com.ppb.controller;
 
 import com.ppb.util.code.CodeFactory;
+import com.ppb.util.code.MysqlFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.Connection;
+import java.util.List;
 
 /**
  * 代码生成入口
@@ -17,12 +18,6 @@ import java.util.Map;
 @Controller
 public class CodeController {
 
-    public static final Map<String,String> methodMap = new HashMap<String,String>();
-
-    static {
-        methodMap.put("","");
-
-    }
 
     /**
      * 进入代码生成配置页面
@@ -31,6 +26,21 @@ public class CodeController {
     @RequestMapping("/toCodePage")
     public String toCodePage(){
         return "code/codePage";
+    }
+
+    /**
+     * 获取数据库表信息
+     * @param datasourceDriver
+     * @param datasourceUrl
+     * @param datasourceUserName
+     * @param datasourceUserPwd
+     * @return
+     */
+    @RequestMapping("/getTables")
+    @ResponseBody
+    public List<String> getTables(String datasourceDriver,String datasourceUrl, String datasourceUserName, String datasourceUserPwd){
+        Connection con  = MysqlFactory.getInstance(datasourceDriver).getConnection(datasourceUrl,datasourceUserName,datasourceUserPwd);
+        return MysqlFactory.getInstance(datasourceDriver).getTables(con);
     }
 
     /**

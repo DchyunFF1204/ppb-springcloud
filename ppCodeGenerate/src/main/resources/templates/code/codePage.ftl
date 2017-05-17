@@ -24,41 +24,102 @@
                 <legend>数据源配置
                     <small class="small">dataSource configure</small>
                 </legend>
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" id="form_datasource">
                     <div class="form-group">
                         <label for="datasourceDriver" class="col-sm-2 control-label">数据源驱动</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="datasourceDriver" type="text"
+                            <input class="form-control" id="datasourceDriver" name="datasourceDriver" type="text"
                                    placeholder="com.mysql.jdbc.Driver"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="datasourceUrl" class="col-sm-2 control-label">数据源地址</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="datasourceUrl" type="text"
+                            <input class="form-control" id="datasourceUrl" name="datasourceUrl" type="text"
                                    placeholder="jdbc:mysql://127.0.0.1:3306/jeecgmybatis?useUnicode=true&characterEncoding=UTF-8"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="datasourceUserName" class="col-sm-2 control-label">用户名</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="datasourceUserName" type="text" placeholder="root"/>
+                            <input class="form-control" id="datasourceUserName" name="datasourceUserName" type="text"
+                                   placeholder="root"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="datasourceUserPwd" class="col-sm-2 control-label">密码</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="datasourceUserPwd" type="password" placeholder="数据库密码"/>
+                            <input class="form-control" id="datasourceUserPwd" name="datasourceUserPwd" type="password"
+                                   placeholder="数据库密码"/>
                         </div>
                     </div>
                 </form>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary glyphicon glyphicon-circle-arrow-left"
+                            onclick="restFrom('form_datasource')">重置
+                    </button>
+                    <button type="button" class="btn btn-primary glyphicon glyphicon-ok-circle"
+                            onclick="findTables()">获取数据表信息
+                    </button>
+                </div>
+
+                <br/>
+                <br/>
+                <div class="row clearfix">
+                    <div class="col-md-6 column">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item active">数据表列表</a>
+                            <div class="list-group-item">
+                                选择数据库表，再生成对应的java代码
+                            </div>
+                            <div class="list-group-item pre-scrollable" style="height:300px" id="datatable_list">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 column">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item active">操作选择</a>
+                            <div class="list-group-item">
+                                选择操作方法，生成对应的java代码
+                            </div>
+                            <div class="list-group-item pre-scrollable" style="height:300px" id="codeMethod">
+                                <li class="list-group-item">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox"  data-type="1"/>查询</label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox"  data-type="2"/>分页</label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox"  data-type="3"/>新增</label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox"  data-type="4"/>编辑</label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" data-type="5"/>删除</label>
+                                    </div>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <br/>
 
                 <legend>代码路径配置
                     <small>code path configure</small>
                 </legend>
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" id="form_codePath">
                     <div class="form-group">
                         <label for="codeTargetProject" class="col-sm-2 control-label">target.project</label>
                         <div class="col-sm-10">
@@ -104,7 +165,7 @@
                 </form>
                 <div class="pull-right">
                     <button type="button" class="btn btn-primary glyphicon glyphicon-circle-arrow-left"
-                            onclick="restFrom()">重置
+                            onclick="restFrom('form_codePath')">重置
                     </button>
                     <button type="button" class="btn btn-primary glyphicon glyphicon-ok-circle">代码生成</button>
                 </div>
@@ -115,8 +176,29 @@
 
 
 <script>
-    function restFrom() {
-        $("body form")[0].reset();
+    function restFrom(formId) {
+        $("#" + formId)[0].reset();
+    }
+
+    function findTables() {
+        $('#form_datasource').find('input[type="text"]').each(function () {
+            if (!$(this).val()) {
+                $(this).val($(this).attr('placeholder'));
+            }
+        });
+        var queryString = $('#form_datasource').serialize();
+        $.post('/getTables', queryString, function (data) {
+            // 循环遍历
+            var trs = '';
+            $.each(data,function(n,th){
+                trs+='<li class="list-group-item">';
+                trs+='<div class="checkbox">';
+                trs+='<label><input type="checkbox" data-tableName="'+th+'"/>'+th+'</label>';
+                trs+='</div>';
+                trs+='</li>';
+            });
+            $('#datatable_list').html(trs);
+        });
     }
 
 </script>

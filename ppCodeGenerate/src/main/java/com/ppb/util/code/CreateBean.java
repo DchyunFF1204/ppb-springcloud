@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class CreateBean {
 	
-	private Connection connection = null;
+	private Connection connection ;
 	static String url;
 	static String username;
 	static String password;
