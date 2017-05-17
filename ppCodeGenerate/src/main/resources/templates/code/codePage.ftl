@@ -30,28 +30,28 @@
                         <label for="datasourceDriver" class="col-sm-2 control-label">数据源驱动</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="datasourceDriver" name="datasourceDriver" type="text"
-                                   placeholder="com.mysql.jdbc.Driver"/>
+                                   value="com.mysql.jdbc.Driver" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="datasourceUrl" class="col-sm-2 control-label">数据源地址</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="datasourceUrl" name="datasourceUrl" type="text"
-                                   placeholder="jdbc:mysql://127.0.0.1:3306/jeecgmybatis?useUnicode=true&characterEncoding=UTF-8"/>
+                                   value="jdbc:mysql://127.0.0.1:3306/jeecgmybatis?useUnicode=true&characterEncoding=UTF-8"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="datasourceUserName" class="col-sm-2 control-label">用户名</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="datasourceUserName" name="datasourceUserName" type="text"
-                                   placeholder="root"/>
+                                   value="root"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="datasourceUserPwd" class="col-sm-2 control-label">密码</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="datasourceUserPwd" name="datasourceUserPwd" type="password"
-                                   placeholder="数据库密码"/>
+                                   value="root"/>
                         </div>
                     </div>
                 </form>
@@ -125,42 +125,42 @@
                         <label for="codeTargetProject" class="col-sm-2 control-label">target.project</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="codeTargetProject" type="text" name="codeTargetProject"
-                                   placeholder="E:/wordspace/ppb-autoCode/src/main/"/>
+                                   value="E:/wordspace/ppb-autoCode/src/main/"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="codeModelPackage" class="col-sm-2 control-label">model.package</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="codeModelPackage" type="text" name="codeModelPackage"
-                                   placeholder="com.ppb.autoCode.model"/>
+                                   value="com.ppb.autoCode.model"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="codeMapperPackage" class="col-sm-2 control-label">mapper.package</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="codeMapperPackage" type="text" name="codeMapperPackage"
-                                   placeholder="com.ppb.autoCode.dao"/>
+                                   value="com.ppb.autoCode.dao"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="codeServicePackage" class="col-sm-2 control-label">service.package</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="codeServicePackage" type="text" name="codeServicePackage"
-                                   placeholder="com.ppb.autoCode.service"/>
+                                   value="com.ppb.autoCode.service"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="codeControllerPackage" class="col-sm-2 control-label">controller.package</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="codeControllerPackage"  name="codeControllerPackage" type="text"
-                                   placeholder="com.ppb.autoCode.controller"/>
+                                   value="com.ppb.autoCode.controller"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="codeFtlPackage" class="col-sm-2 control-label">ftl.package</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="codeFtlPackage" type="text" name="codeFtlPackage"
-                                   placeholder="E:/wordspace/ppb-autoCode/src/main/webapp/WEB-INF/view"/>
+                                   value="E:/wordspace/ppb-autoCode/src/main/webapp/WEB-INF/view"/>
                         </div>
                     </div>
                 </form>
@@ -182,11 +182,6 @@
     }
 
     function findTables() {
-        $('#form_datasource').find('input').each(function () {
-            if (!$(this).val()) {
-                $(this).val($(this).attr('placeholder'));
-            }
-        });
         var queryString = $('#form_datasource').serialize();
         $.post('/getTables', queryString, function (data) {
             // 循环遍历
@@ -203,17 +198,6 @@
     }
 
     function buildCode(){
-        $('#form_datasource').find('input').each(function () {
-            if (!$(this).val()) {
-                $(this).val($(this).attr('placeholder'));
-            }
-        });
-        $('#form_codePath').find('input').each(function () {
-            if (!$(this).val()) {
-                $(this).val($(this).attr('placeholder'));
-            }
-        });
-
         var codeMethod = '';
         $('#codeMethod').find('input[type="checkbox"]:checked').map(function(){
             codeMethod += $(this).data('type')+',';

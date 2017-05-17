@@ -48,7 +48,7 @@ public class CodeFactory {
 			// sqlxml 工程路径resources
 			String sqlXmlPath = codeBean.getCodeTargetProject()+"resources"+"\\" + className + "Mapper.xml";
 			// 工程路径java
-			String pckPath = codeBean.getCodeTargetProject()+"java";
+			String pckPath = codeBean.getCodeTargetProject()+"java"+"\\";
 			// ftl 工程路径
 			String ftlPath = codeBean.getCodeFtlPackage().replace(".", "/")+"\\" + className + "Page.ftl";
 			Map<String,Object> context = Maps.newConcurrentMap();
@@ -68,7 +68,7 @@ public class CodeFactory {
 			CommonPageParser.WriterCreatePage(context, "DaoTemplate.ftl", pckPath, mapperPath);
 			CommonPageParser.WriterCreatePage(context, "ServiceTemplate.ftl", pckPath, servicePath);
 			CommonPageParser.WriterCreatePage(context, "ControllerTemplate.ftl", pckPath, controllerPath);
-			CommonPageParser.WriterCreatePage(context, "MapperTemplate.ftl", sqlXmlPath, mapperPath);
+			CommonPageParser.WriterCreatePage(context, "MapperTemplate.ftl", "", sqlXmlPath);
 			CommonPageParser.WriterCreatePage(context, "easyui.ftl", "", ftlPath);
 		});
 	}
