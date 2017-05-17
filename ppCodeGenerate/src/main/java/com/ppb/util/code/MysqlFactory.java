@@ -88,38 +88,43 @@ public class MysqlFactory {
      * @return
      * @throws SQLException
      */
-    public List<ColumnData> getColumnDatas(String tableName,Connection con) throws SQLException {
+    public List<ColumnData> getColumnDatas(String tableName,Connection con) {
+        List columnList = Lists.newArrayList();
         String SQLColumns = "select column_name ,data_type,column_comment,0,0,character_maximum_length,is_nullable nullable from information_schema.columns where table_name =  '"
                 + tableName + "' " + "and table_schema =  'sys'";
-        PreparedStatement ps = con.prepareStatement(SQLColumns);
-        List columnList = Lists.newArrayList();
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            String name = rs.getString(1);
-            String type = rs.getString(2);
-            String comment = rs.getString(3);
-            String precision = rs.getString(4);
-            String scale = rs.getString(5);
-            String charmaxLength = (rs.getString(6) == null) ? "" : rs.getString(6);
-            String nullable = TableConvert.getNullAble(rs.getString(7));
-            ColumnData cd = new ColumnData();
-            cd.setColumnName(name);
-            Map<String,String> re = getFiledInfo(type, precision, scale);
-            cd.setImportPackage(re.get("importType"));
-            cd.setDataType(re.get("dataTy"));
-            cd.setMname(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, name)); // bean filedName
-            cd.setMethod(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)); // 获取方法名
-            cd.setColumnType(rs.getString(2));
-            cd.setColumnComment(comment);
-            cd.setPrecision(precision);
-            cd.setScale(scale);
-            cd.setCharmaxLength(charmaxLength);
-            cd.setNullable(nullable);
-            columnList.add(cd);
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(SQLColumns);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString(1);
+                String type = rs.getString(2);
+                String comment = rs.getString(3);
+                String precision = rs.getString(4);
+                String scale = rs.getString(5);
+                String charmaxLength = (rs.getString(6) == null) ? "" : rs.getString(6);
+                String nullable = TableConvert.getNullAble(rs.getString(7));
+                ColumnData cd = new ColumnData();
+                cd.setColumnName(name);
+                Map<String,String> re = getFiledInfo(type, precision, scale);
+                cd.setImportPackage(re.get("importType"));
+                cd.setDataType(re.get("dataTy"));
+                cd.setMname(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, name)); // bean filedName
+                cd.setMethod(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)); // 获取方法名
+                cd.setColumnType(rs.getString(2));
+                cd.setColumnComment(comment);
+                cd.setPrecision(precision);
+                cd.setScale(scale);
+                cd.setCharmaxLength(charmaxLength);
+                cd.setNullable(nullable);
+                columnList.add(cd);
+            }
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        rs.close();
-        ps.close();
-        con.close();
         return columnList;
     }
 
@@ -179,7 +184,7 @@ public class MysqlFactory {
      * @return
      * @throws SQLException
      */
-    public String getBeanImportPackage(List<ColumnData> list) throws SQLException {
+    public String getBeanImportPackage(List<ColumnData> list) {
         Set<String> transformPersonList = FluentIterable
                 .from(list)
                 .transform(new Function<ColumnData, String>() {

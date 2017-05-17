@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <script src="static/js/jquery-2.0.3.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/main/tool.js"></script>
 </head>
 <body>
 
@@ -123,42 +124,42 @@
                     <div class="form-group">
                         <label for="codeTargetProject" class="col-sm-2 control-label">target.project</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="codeTargetProject" type="text"
+                            <input class="form-control" id="codeTargetProject" type="text" name="codeTargetProject"
                                    placeholder="E:/wordspace/ppb-autoCode/src/main/"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="codeModelPackage" class="col-sm-2 control-label">model.package</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="codeModelPackage" type="text"
+                            <input class="form-control" id="codeModelPackage" type="text" name="codeModelPackage"
                                    placeholder="com.ppb.autoCode.model"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="codeMapperPackage" class="col-sm-2 control-label">mapper.package</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="codeMapperPackage" type="text"
+                            <input class="form-control" id="codeMapperPackage" type="text" name="codeMapperPackage"
                                    placeholder="com.ppb.autoCode.dao"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="codeServicePackage" class="col-sm-2 control-label">service.package</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="codeServicePackage" type="text"
+                            <input class="form-control" id="codeServicePackage" type="text" name="codeServicePackage"
                                    placeholder="com.ppb.autoCode.service"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="codeControllerPackage" class="col-sm-2 control-label">controller.package</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="codeControllerPackage" type="text"
+                            <input class="form-control" id="codeControllerPackage"  name="codeControllerPackage" type="text"
                                    placeholder="com.ppb.autoCode.controller"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="codeFtlPackage" class="col-sm-2 control-label">ftl.package</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="codeFtlPackage" type="text"
+                            <input class="form-control" id="codeFtlPackage" type="text" name="codeFtlPackage"
                                    placeholder="E:/wordspace/ppb-autoCode/src/main/webapp/WEB-INF/view"/>
                         </div>
                     </div>
@@ -167,7 +168,7 @@
                     <button type="button" class="btn btn-primary glyphicon glyphicon-circle-arrow-left"
                             onclick="restFrom('form_codePath')">重置
                     </button>
-                    <button type="button" class="btn btn-primary glyphicon glyphicon-ok-circle">代码生成</button>
+                    <button type="button" class="btn btn-primary glyphicon glyphicon-ok-circle" onclick="buildCode()">代码生成</button>
                 </div>
             </div>
         </div>
@@ -181,7 +182,7 @@
     }
 
     function findTables() {
-        $('#form_datasource').find('input[type="text"]').each(function () {
+        $('#form_datasource').find('input').each(function () {
             if (!$(this).val()) {
                 $(this).val($(this).attr('placeholder'));
             }
@@ -193,7 +194,7 @@
             $.each(data,function(n,th){
                 trs+='<li class="list-group-item">';
                 trs+='<div class="checkbox">';
-                trs+='<label><input type="checkbox" data-tableName="'+th+'"/>'+th+'</label>';
+                trs+='<label><input type="checkbox" data-tablename="'+th+'"/>'+th+'</label>';
                 trs+='</div>';
                 trs+='</li>';
             });
@@ -201,6 +202,40 @@
         });
     }
 
+    function buildCode(){
+        $('#form_datasource').find('input').each(function () {
+            if (!$(this).val()) {
+                $(this).val($(this).attr('placeholder'));
+            }
+        });
+        $('#form_codePath').find('input').each(function () {
+            if (!$(this).val()) {
+                $(this).val($(this).attr('placeholder'));
+            }
+        });
+
+        var codeMethod = '';
+        $('#codeMethod').find('input[type="checkbox"]:checked').map(function(){
+            codeMethod += $(this).data('type')+',';
+        })
+        codeMethod = codeMethod.substring(0, codeMethod.length-1);
+
+        var tableNames = '';
+        $('#datatable_list').find('input[type="checkbox"]:checked').map(function(){
+            tableNames += $(this).data('tablename')+',';
+        })
+        tableNames = tableNames.substring(0, tableNames.length-1);
+
+        var form_datasource = $('#form_datasource').serializeJson();
+        var form_codePath = $('#form_codePath').serializeJson();
+        var param = $.extend({}, form_datasource,form_codePath);
+        param.tableNames = tableNames;
+        param.codeMethod = codeMethod;
+        console.log(param);
+        $.post('/beginBuild', param, function (data) {
+
+        },'json')
+    }
 </script>
 </body>
 </html>

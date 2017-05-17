@@ -1,13 +1,16 @@
 package com.ppb.controller;
 
+import com.ppb.model.CodeBean;
 import com.ppb.util.code.CodeFactory;
 import com.ppb.util.code.MysqlFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 代码生成入口
@@ -45,13 +48,13 @@ public class CodeController {
 
     /**
      * 生成代码
-     * @param tableName   表名称
-     * @param keyType   key类型
      */
     @RequestMapping("/beginBuild")
     @ResponseBody
-    public void beginBuild(String tableName,String keyType){
-        CodeFactory.codeGenerate(tableName, "", "", keyType, "pages",true);
+    public void beginBuild(CodeBean codeBean){
+        System.out.print(codeBean);
+        CodeFactory.buildCode(codeBean);
+        //CodeFactory.codeGenerate(tableName, "", "", keyType, "pages",true);
     }
 
 }
