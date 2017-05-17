@@ -103,7 +103,6 @@ public class MysqlFactory {
                 String precision = rs.getString(4);
                 String scale = rs.getString(5);
                 String charmaxLength = (rs.getString(6) == null) ? "" : rs.getString(6);
-                String nullable = TableConvert.getNullAble(rs.getString(7));
                 ColumnData cd = new ColumnData();
                 cd.setColumnName(name);
                 Map<String,String> re = getFiledInfo(type, precision, scale);
@@ -116,7 +115,6 @@ public class MysqlFactory {
                 cd.setPrecision(precision);
                 cd.setScale(scale);
                 cd.setCharmaxLength(charmaxLength);
-                cd.setNullable(nullable);
                 columnList.add(cd);
             }
             rs.close();

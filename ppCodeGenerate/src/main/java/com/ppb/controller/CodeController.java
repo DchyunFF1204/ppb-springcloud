@@ -52,9 +52,7 @@ public class CodeController {
     @RequestMapping("/beginBuild")
     @ResponseBody
     public void beginBuild(CodeBean codeBean){
-        System.out.print(codeBean);
         CodeFactory.buildCode(codeBean);
-        //CodeFactory.codeGenerate(tableName, "", "", keyType, "pages",true);
     }
 
 }
