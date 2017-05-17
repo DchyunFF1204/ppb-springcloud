@@ -87,27 +87,27 @@
                             <div class="list-group-item pre-scrollable" style="height:300px" id="codeMethod">
                                 <li class="list-group-item">
                                     <div class="checkbox">
-                                        <label><input type="checkbox"  data-type="1"/>查询</label>
+                                        <label><input type="checkbox"  data-type="1" checked/>查询</label>
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="checkbox">
-                                        <label><input type="checkbox"  data-type="2"/>分页</label>
+                                        <label><input type="checkbox"  data-type="2" checked/>分页</label>
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="checkbox">
-                                        <label><input type="checkbox"  data-type="3"/>新增</label>
+                                        <label><input type="checkbox"  data-type="3" checked/>新增</label>
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="checkbox">
-                                        <label><input type="checkbox"  data-type="4"/>编辑</label>
+                                        <label><input type="checkbox"  data-type="4" checked/>编辑</label>
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="checkbox">
-                                        <label><input type="checkbox" data-type="5"/>删除</label>
+                                        <label><input type="checkbox" data-type="5" checked/>删除</label>
                                     </div>
                                 </li>
                             </div>

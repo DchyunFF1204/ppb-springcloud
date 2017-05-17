@@ -65,6 +65,7 @@ public class CodeFactory {
 			context.put("importPackage", mysqlFactory.getBeanImportPackage(list));
 			CommonPageParser.WriterCreatePage(context, "EntityTemplate.ftl", pckPath, modelPath);
 			CommonPageParser.WriterCreatePage(context, "EntityExampleTemplate.ftl", pckPath, modelExamplePath);
+			CommonPageParser.WriterCreatePage(context, "EntityDtoTemplate.ftl", pckPath, modelDtoPath);
 			CommonPageParser.WriterCreatePage(context, "DaoTemplate.ftl", pckPath, mapperPath);
 			CommonPageParser.WriterCreatePage(context, "ServiceTemplate.ftl", pckPath, servicePath);
 			CommonPageParser.WriterCreatePage(context, "ControllerTemplate.ftl", pckPath, controllerPath);
