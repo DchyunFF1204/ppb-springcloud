@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -136,6 +141,8 @@ public class AlipayController {
     /**
      * 下载对账单地址
      *
+     * 账单文件下载地址，30秒有效
+     *
      * @param bill_date yyyy-MM-dd    	需要下载的账单日期，最晚是当期日期的前一天
      * @return
      */
@@ -147,7 +154,44 @@ public class AlipayController {
                 "    \"bill_date\":\"" + bill_date + "\"" +
                 "  }");//设置业务参数
         AlipayDataDataserviceBillDownloadurlQueryResponse response = alipayClient.execute(request);
-        return response.getBody();
+        //将接口返回的对账单下载地址传入urlStr
+        String urlStr = response.getBody();
+        //指定希望保存的文件路径
+        String filePath = "/Users/fund_bill_20160405.csv";
+        URL url = null;
+        HttpURLConnection httpUrlConnection = null;
+        InputStream fis = null;
+        FileOutputStream fos = null;
+        try {
+            url = new URL(urlStr);
+            httpUrlConnection = (HttpURLConnection) url.openConnection();
+            httpUrlConnection.setConnectTimeout(5 * 1000);
+            httpUrlConnection.setDoInput(true);
+            httpUrlConnection.setDoOutput(true);
+            httpUrlConnection.setUseCaches(false);
+            httpUrlConnection.setRequestMethod("GET");
+            httpUrlConnection.setRequestProperty("Charsert", "UTF-8");
+            httpUrlConnection.connect();
+            fis = httpUrlConnection.getInputStream();
+            byte[] temp = new byte[1024];
+            int b;
+            fos = new FileOutputStream(new File(filePath));
+            while ((b = fis.read(temp)) != -1) {
+                fos.write(temp, 0, b);
+                fos.flush();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(fis!=null) fis.close();
+                if(fos!=null) fos.close();
+                if(httpUrlConnection!=null) httpUrlConnection.disconnect();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "下载成功";
     }
 
 
