@@ -36,6 +36,33 @@ public class AlipayController {
     private AlipayConfig alipayConfig;
 
     /**
+     * 支付宝pc支付
+     * @param out_trade_no
+     * @param total_amount
+     * @param subject
+     * @param body
+     * @param returnUrl
+     * @return
+     * @throws AlipayApiException
+     */
+    @RequestMapping("/alipayTradePagePay")
+    public String alipayTradePagePay(String out_trade_no, String total_amount, String subject, String body,String returnUrl) throws AlipayApiException {
+        AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();//创建API对应的request
+        alipayRequest.setReturnUrl("http://domain.com/CallBack/return_url.jsp");
+        alipayRequest.setNotifyUrl("http://domain.com/alipayNotifyTradeWapPay");//在公共参数中设置回跳和通知地址
+        alipayRequest.setBizContent("{" +
+                "    \"out_trade_no\":\""+out_trade_no+"\"," +
+                "    \"product_code\":\"FAST_INSTANT_TRADE_PAY\"," +
+                "    \"total_amount\":"+total_amount+"," +
+                "    \"subject\":\""+subject+"\"," +
+                "    \"body\":\""+body+"\"," +
+                "    \"passback_params\":\"merchantBizType%3d3C%26merchantBizNo%3d2016010101111\"," + //公用回传参数
+                "  }");//填充业务参数
+        String form = alipayClient.pageExecute(alipayRequest).getBody(); //调用SDK生成表单
+        return form;
+    }
+
+    /**
      * 支付宝wap支付
      * @param out_trade_no
      * @param total_amount
