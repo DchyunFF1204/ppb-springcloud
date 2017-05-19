@@ -28,12 +28,12 @@ public class CodeFactory {
 	 * @param codeBean
 	 */
 	public static void buildCode(CodeBean codeBean){
-		MysqlFactory mysqlFactory = MysqlFactory.getInstance(codeBean.getDatasourceDriver());
-		Connection con  = mysqlFactory.getConnection(codeBean.getDatasourceUrl(),
-						codeBean.getDatasourceUserName(),
-						codeBean.getDatasourceUserPwd());
 		List<String> tables = Lists.newArrayList(Splitter.on(",").split(codeBean.getTableNames()));
 		tables.forEach(entry-> {
+			MysqlFactory mysqlFactory = MysqlFactory.getInstance(codeBean.getDatasourceDriver());
+			Connection con  = mysqlFactory.getConnection(codeBean.getDatasourceUrl(),
+					codeBean.getDatasourceUserName(),
+					codeBean.getDatasourceUserPwd());
 			String className = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL,entry);
 			// 实体类工程路径
 			String modelPath = codeBean.getCodeModelPackage().replace(".", "/")+ "\\" + className + ".java";
