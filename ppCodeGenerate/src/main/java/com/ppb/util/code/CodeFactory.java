@@ -22,7 +22,7 @@ import java.util.Map;
 public class CodeFactory {
 	
 	private static final Log log = LogFactory.getLog(CodeFactory.class);
-	
+
 	/**
 	 * 代码生成
 	 * @param codeBean

@@ -177,7 +177,7 @@ public class MysqlFactory {
     }
 
     /**
-     *  获取bean importPage
+     * 获取bean importPage
      * @param list
      * @return
      * @throws SQLException
