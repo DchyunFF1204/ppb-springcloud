@@ -5,10 +5,7 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.*;
-import com.alipay.api.response.AlipayDataDataserviceBillDownloadurlQueryResponse;
-import com.alipay.api.response.AlipayTradeAppPayResponse;
-import com.alipay.api.response.AlipayTradeQueryResponse;
-import com.alipay.api.response.AlipayTradeRefundResponse;
+import com.alipay.api.response.*;
 import com.ppb.client.AlipayConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,7 +67,7 @@ public class AlipayController {
      * @throws AlipayApiException
      */
     @RequestMapping("/alipayTradeAppPay")
-    public String alipayTradeAppPay(String body,String subject,String out_trade_no,String total_amount) throws AlipayApiException {
+    public AlipayTradeAppPayResponse alipayTradeAppPay(String body,String subject,String out_trade_no,String total_amount) throws AlipayApiException {
         //实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称：alipay.trade.app.pay
         AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
         //SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
@@ -85,7 +82,7 @@ public class AlipayController {
         request.setNotifyUrl("http://domain.com/alipayNotifyTradeWapPay");
         AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);
         System.out.println(response.getBody());//就是orderString 可以直接给客户端请求，无需再做处理。
-        return response.getBody();
+        return response;
     }
 
     /**
@@ -116,11 +113,11 @@ public class AlipayController {
         String trade_status = new String(request.getParameter("trade_status"));
         //请在这里加上商户的业务逻辑程序代码
         if (trade_status.equals("TRADE_FINISHED") || trade_status.equals("TRADE_SUCCESS")) {
-            //TODO 校验订单    修改订单状态
             //商户订单号
             String out_trade_no = new String(request.getParameter("out_trade_no"));
             //支付宝交易号
             String trade_no = new String(request.getParameter("trade_no"));
+            //TODO 校验订单    修改订单状态
         }
         return "success";
     }
@@ -133,14 +130,14 @@ public class AlipayController {
      * @return
      */
     @RequestMapping("/alipayTradeQuery")
-    public String alipayTradeQuery(String out_trade_no, String trade_no) throws AlipayApiException {
+    public AlipayTradeQueryResponse alipayTradeQuery(String out_trade_no, String trade_no) throws AlipayApiException {
         AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();//创建API对应的request类
         request.setBizContent("{" +
                 "    \"out_trade_no\":\"" + out_trade_no + "\"," +
                 "    \"trade_no\":\"" + trade_no + "\"" +
                 "  }");//设置业务参数
         AlipayTradeQueryResponse response = alipayClient.execute(request); //通过alipayClient调用API，获得对应的response类
-        return response.getBody();
+        return response;
     }
 
     /**
@@ -153,7 +150,7 @@ public class AlipayController {
      * @return
      */
     @RequestMapping("/alipayTradeRefund")
-    public String alipayTradeRefund(String out_trade_no, String trade_no, String out_request_no, String refund_amount) throws AlipayApiException {
+    public AlipayTradeRefundResponse alipayTradeRefund(String out_trade_no, String trade_no, String out_request_no, String refund_amount) throws AlipayApiException {
         AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();//创建API对应的request类
         request.setBizContent("{" +
                 "    \"out_trade_no\":\"" + out_trade_no + "\"," +
@@ -162,7 +159,27 @@ public class AlipayController {
                 "    \"refund_amount\":\"" + refund_amount + "\"" +
                 "  }");//设置业务参数
         AlipayTradeRefundResponse response = alipayClient.execute(request);
-        return response.getBody();
+        return response;
+    }
+
+    /**
+     * 支付宝退款单查询
+     * @param trade_no
+     * @param out_trade_no
+     * @param out_request_no
+     * @return
+     * @throws AlipayApiException
+     */
+    @RequestMapping("/alipayTradeFastpayRefundQuery")
+    public AlipayTradeFastpayRefundQueryResponse alipayTradeFastpayRefundQuery(String trade_no,String out_trade_no,String out_request_no) throws AlipayApiException {
+        AlipayTradeFastpayRefundQueryRequest request = new AlipayTradeFastpayRefundQueryRequest();
+        request.setBizContent("{" +
+                "    \"trade_no\":\""+trade_no+"\"," +
+                "    \"out_trade_no\":\""+out_trade_no+"\"," +
+                "    \"out_request_no\":\""+out_request_no+"\"" +
+                "  }");
+        AlipayTradeFastpayRefundQueryResponse response = alipayClient.execute(request);
+        return response;
     }
 
     /**
@@ -220,6 +237,5 @@ public class AlipayController {
         }
         return "下载成功";
     }
-
 
 }
