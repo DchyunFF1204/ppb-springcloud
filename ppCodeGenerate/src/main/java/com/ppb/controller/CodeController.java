@@ -22,6 +22,12 @@ import java.util.Map;
 public class CodeController {
 
 
+    @RequestMapping("/toTest")
+    public String toTest(){
+        return "code/temp";
+    }
+
+
     /**
      * 进入代码生成配置页面
      * @return

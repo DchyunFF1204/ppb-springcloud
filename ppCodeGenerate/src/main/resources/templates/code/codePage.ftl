@@ -6,9 +6,9 @@
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="static/css/bootstrap.min.css">
-    <script src="static/js/jquery-2.0.3.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="static/assets/global/plugins/bootstrap/css/bootstrap.min.css">
+    <script src="static/assets/global/plugins/jquery.min.js"></script>
+    <script src="static/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="static/js/main/tool.js"></script>
 </head>
 <body>
