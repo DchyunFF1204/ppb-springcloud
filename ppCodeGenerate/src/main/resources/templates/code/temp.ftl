@@ -117,6 +117,6 @@
 <script src="static/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
 <script src="static/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script src="static/js/main/tool.js"></script>
-<script src="static/js/temp/temp.js"></script>
+<script src="static/temp/temp.js"></script>
 </body>
 </html>
