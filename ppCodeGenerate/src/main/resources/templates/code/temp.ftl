@@ -13,18 +13,8 @@
     <link rel="stylesheet" href="static/assets/global/css/components.min.css">
     <link rel="stylesheet" href="static/assets/global/css/plugins.min.css">
     <link rel="stylesheet" href="static/assets/global/plugins/bootstrap-table/bootstrap-table.min.css">
-
-    <script src="static/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-    <script src="static/assets/global/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-    <script src="static/assets/global/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-
     <link rel="stylesheet" href="static/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css">
-    <script src="static/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
 
-    <script src="static/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-
-    <script src="static/js/main/tool.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -116,7 +106,12 @@
     </div>
 </div>
 
-
+<script src="static/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="static/assets/global/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="static/assets/global/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="static/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="static/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="static/js/main/tool.js"></script>
 <script>
 
     $('#usertype').selectpicker({
