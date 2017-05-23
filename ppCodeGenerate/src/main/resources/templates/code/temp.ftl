@@ -6,7 +6,6 @@
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <script src="static/assets/global/plugins/jquery.min.js"></script>
     <link href="static/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="static/assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
@@ -105,7 +104,7 @@
 
     </div>
 </div>
-
+<script src="static/assets/global/plugins/jquery.min.js"></script>
 <script src="static/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="static/assets/global/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="static/assets/global/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
