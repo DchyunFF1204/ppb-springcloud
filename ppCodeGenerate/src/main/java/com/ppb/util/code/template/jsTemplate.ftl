@@ -10,7 +10,7 @@
 var ${lowClassName}Js = {
     queryTableLink : "/${lowClassName}/select${className}PgByModel",   // 查询列表 server url
     queryDataByPriId : "/${lowClassName}/get${className}ById",// 主键查询 server url
-    saveData : "/${lowClassName}/save${className}",   // 数据保存 server url
+    saveDataLink : "/${lowClassName}/save${className}",   // 数据保存 server url
     // 初始化条件栏位
     initParamForm : function(){
         <#noparse>$(</#noparse>'#usertype').selectpicker({
@@ -111,7 +111,8 @@ var ${lowClassName}Js = {
     // 动态button 设置及绑定事件
     setButtons : function (buttonsParam) {
         var ops = '';
-        for (var bun in buttonsParam){
+        for (var j in buttonsParam){
+            var bun = buttonsParam[j];
             ops +='<button type="button" class="'+bun.selector+'" data-param="'+bun.param+'" onclick="'+bun.callFunction+'"><span class="'+bun.icon+'" aria-hidden="true"></span>'+bun.title+'</button>';
         }
         return ops;
@@ -155,7 +156,7 @@ var ${lowClassName}Js = {
     // 保存数据
     saveData : function (useParam) {
         // ajax 请求
-        <#noparse>$</#noparse>.post(${lowClassName}Js.saveData, useParam, function (result) {
+        <#noparse>$</#noparse>.post(${lowClassName}Js.saveDataLink, useParam, function (result) {
             if(result.success){
                 ${lowClassName}Js.queryDataTable();
             }else{

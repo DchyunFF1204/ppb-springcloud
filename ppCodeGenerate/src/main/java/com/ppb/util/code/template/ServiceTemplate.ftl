@@ -45,7 +45,7 @@ public class ${className}Service {
         if(model != null){
             <#list feilds as fl>
             <#if fl.dataType == 'String'>
-            if(Strings.isNullOrEmpty(model.get${fl.method}())){
+            if(!Strings.isNullOrEmpty(model.get${fl.method}())){
                 criteria.and${fl.method}EqualTo(model.get${fl.method}());
             }
             <#else>

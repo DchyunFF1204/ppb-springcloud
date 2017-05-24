@@ -10,7 +10,7 @@ $(function () {
 var ofuserJs = {
     queryTableLink : "/ofuser/selectOfuserPgByModel",   // 查询列表 server url
     queryDataByPriId : "/ofuser/getOfuserById",// 主键查询 server url
-    saveData : "/ofuser/saveOfuser",   // 数据保存 server url
+    saveDataLink : "/ofuser/saveOfuser",   // 数据保存 server url
     // 初始化条件栏位
     initParamForm : function(){
         $('#usertype').selectpicker({
@@ -111,7 +111,8 @@ var ofuserJs = {
     // 动态button 设置及绑定事件
     setButtons : function (buttonsParam) {
         var ops = '';
-        for (var bun in buttonsParam){
+        for (var j in buttonsParam){
+            var bun = buttonsParam[j];
             ops +='<button type="button" class="'+bun.selector+'" data-param="'+bun.param+'" onclick="'+bun.callFunction+'"><span class="'+bun.icon+'" aria-hidden="true"></span>'+bun.title+'</button>';
         }
         return ops;
@@ -155,7 +156,7 @@ var ofuserJs = {
     // 保存数据
     saveData : function (useParam) {
         // ajax 请求
-        $.post(ofuserJs.saveData, useParam, function (result) {
+        $.post(ofuserJs.saveDataLink, useParam, function (result) {
             if(result.success){
                 ofuserJs.queryDataTable();
             }else{

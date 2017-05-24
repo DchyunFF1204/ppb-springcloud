@@ -46,25 +46,25 @@ public class OfuserService {
             if(model.getId() != null){
                 criteria.andIdEqualTo(model.getId());
             }
-            if(Strings.isNullOrEmpty(model.getUsername())){
+            if(!Strings.isNullOrEmpty(model.getUsername())){
                 criteria.andUsernameEqualTo(model.getUsername());
             }
-            if(Strings.isNullOrEmpty(model.getPlainpassword())){
+            if(!Strings.isNullOrEmpty(model.getPlainpassword())){
                 criteria.andPlainpasswordEqualTo(model.getPlainpassword());
             }
-            if(Strings.isNullOrEmpty(model.getEncryptedpassword())){
+            if(!Strings.isNullOrEmpty(model.getEncryptedpassword())){
                 criteria.andEncryptedpasswordEqualTo(model.getEncryptedpassword());
             }
-            if(Strings.isNullOrEmpty(model.getName())){
+            if(!Strings.isNullOrEmpty(model.getName())){
                 criteria.andNameEqualTo(model.getName());
             }
-            if(Strings.isNullOrEmpty(model.getEmail())){
+            if(!Strings.isNullOrEmpty(model.getEmail())){
                 criteria.andEmailEqualTo(model.getEmail());
             }
-            if(Strings.isNullOrEmpty(model.getCreationdate())){
+            if(!Strings.isNullOrEmpty(model.getCreationdate())){
                 criteria.andCreationdateEqualTo(model.getCreationdate());
             }
-            if(Strings.isNullOrEmpty(model.getModificationdate())){
+            if(!Strings.isNullOrEmpty(model.getModificationdate())){
                 criteria.andModificationdateEqualTo(model.getModificationdate());
             }
             if(model.getOpTime() != null){
