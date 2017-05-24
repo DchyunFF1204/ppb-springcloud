@@ -51,6 +51,7 @@ public class CodeFactory {
 			String pckPath = codeBean.getCodeTargetProject()+"java"+"\\";
 			// ftl 工程路径
 			String ftlPath = codeBean.getCodeFtlPackage().replace(".", "/")+"\\" + className + "Page.ftl";
+			String jsPath = codeBean.getCodeFtlPackage().replace(".","/")+"\\"+className+".js";
 			Map<String,Object> context = Maps.newConcurrentMap();
 			context.put("className", className);
 			context.put("lowClassName", CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, entry));
@@ -71,7 +72,7 @@ public class CodeFactory {
 			CommonPageParser.WriterCreatePage(context, "ControllerTemplate.ftl", pckPath, controllerPath);
 			CommonPageParser.WriterCreatePage(context, "MapperTemplate.ftl", "", sqlXmlPath);
 			CommonPageParser.WriterCreatePage(context, "ftlTemplate.ftl", "", ftlPath);
-			CommonPageParser.WriterCreatePage(context, "jsTemplate.ftl", "", ftlPath);
+			CommonPageParser.WriterCreatePage(context, "jsTemplate.ftl", "", jsPath);
 		});
 	}
 }
