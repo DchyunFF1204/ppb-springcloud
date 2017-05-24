@@ -70,7 +70,8 @@ public class CodeFactory {
 			CommonPageParser.WriterCreatePage(context, "ServiceTemplate.ftl", pckPath, servicePath);
 			CommonPageParser.WriterCreatePage(context, "ControllerTemplate.ftl", pckPath, controllerPath);
 			CommonPageParser.WriterCreatePage(context, "MapperTemplate.ftl", "", sqlXmlPath);
-			CommonPageParser.WriterCreatePage(context, "easyui.ftl", "", ftlPath);
+			CommonPageParser.WriterCreatePage(context, "ftlTemplate.ftl", "", ftlPath);
+			CommonPageParser.WriterCreatePage(context, "jsTemplate.ftl", "", ftlPath);
 		});
 	}
 }

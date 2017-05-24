@@ -8,7 +8,7 @@
 });
 
 var ${lowClassName}Js = {
-    queryTableLink : "/${lowClassName}/select${className}PgByModel",   // 查询列表server url
+    queryTableLink : "/${lowClassName}/select${className}PgByModel",   // 查询列表 server url
     queryDataByPriId : "/${lowClassName}/get${className}ById",// 主键查询 server url
     saveData : "/${lowClassName}/save${className}",   // 数据保存 server url
     // 初始化条件栏位
