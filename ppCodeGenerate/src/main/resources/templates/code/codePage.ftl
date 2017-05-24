@@ -175,6 +175,23 @@
     </div>
 </div>
 
+<div class="modal fade draggable " id="js_table_modal"  data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 50%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="hTitle">代码生成日志</h4>
+            </div>
+            <div class="modal-body" tabindex="2" style="outline: none;" id="loglist">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary glyphicon glyphicon-ok-circle"  data-dismiss="modal"><i class="icon-remove"></i>确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     function restFrom(formId) {
@@ -215,9 +232,16 @@
         var param = $.extend({}, form_datasource,form_codePath);
         param.tableNames = tableNames;
         param.codeMethod = codeMethod;
-        console.log(param);
+        $('#js_table_modal').modal('show');
         $.post('/beginBuild', param, function (data) {
-
+            console.log(data);
+            var trss = '<ol contenteditable="true">';
+            $.each(data,function(n,th){
+                trss +='<li>'+th+'</li>';
+            });
+            trss += '</ol>';
+            console.log(trss);
+            $('#loglist').html(trss);
         },'json')
     }
 </script>

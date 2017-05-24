@@ -1,5 +1,6 @@
 package com.ppb.util.code;
 
+import com.google.common.collect.Lists;
 import freemarker.template.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -8,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -30,8 +32,8 @@ public class CommonPageParser {
 		}
 	}
 	
-	public static void WriterCreatePage(Map<String,Object> context, String templateName, String fileDirPath, String targetFile) {
-		
+	public static List<String> WriterCreatePage(Map<String,Object> context, String templateName, String fileDirPath, String targetFile) {
+		List<String> sb = Lists.newArrayList();
 		File file;
 		try {
 			file = new File(fileDirPath + targetFile);
@@ -39,6 +41,7 @@ public class CommonPageParser {
 				new File(file.getParent()).mkdirs();
 			}
 			else if (isReplace) {
+				sb.add("替换文件:" + file.getAbsolutePath());
 				log.info("替换文件:" + file.getAbsolutePath());
 				file.delete();
 			}
@@ -53,11 +56,13 @@ public class CommonPageParser {
 			writer.flush();
 			writer.close();
 			fos.close();
+			sb.add("生成文件：" + file.getAbsolutePath());
 			log.info("生成文件：" + file.getAbsolutePath());
 		}
 		catch (Exception e) {
 			log.error(e);
 		}
+		return sb;
 	}
 	
 	public static String getProjectPath() {

@@ -57,8 +57,8 @@ public class CodeController {
      */
     @RequestMapping("/beginBuild")
     @ResponseBody
-    public void beginBuild(CodeBean codeBean){
-        CodeFactory.buildCode(codeBean);
+    public List<String> beginBuild(CodeBean codeBean){
+        return CodeFactory.buildCode(codeBean);
     }
 
 }

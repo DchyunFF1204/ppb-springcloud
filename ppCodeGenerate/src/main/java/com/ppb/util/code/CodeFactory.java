@@ -27,7 +27,8 @@ public class CodeFactory {
 	 * 代码生成
 	 * @param codeBean
 	 */
-	public static void buildCode(CodeBean codeBean){
+	public static List<String> buildCode(CodeBean codeBean){
+		List<String> result = Lists.newArrayList();
 		List<String> tables = Lists.newArrayList(Splitter.on(",").split(codeBean.getTableNames()));
 		tables.forEach(entry-> {
 			MysqlFactory mysqlFactory = MysqlFactory.getInstance(codeBean.getDatasourceDriver());
@@ -64,15 +65,17 @@ public class CodeFactory {
 			List<ColumnData> list = mysqlFactory.getColumnDatas(entry,con);
 			context.put("feilds", list);
 			context.put("importPackage", mysqlFactory.getBeanImportPackage(list));
-			CommonPageParser.WriterCreatePage(context, "EntityTemplate.ftl", pckPath, modelPath);
-			CommonPageParser.WriterCreatePage(context, "EntityExampleTemplate.ftl", pckPath, modelExamplePath);
-			CommonPageParser.WriterCreatePage(context, "EntityDtoTemplate.ftl", pckPath, modelDtoPath);
-			CommonPageParser.WriterCreatePage(context, "DaoTemplate.ftl", pckPath, mapperPath);
-			CommonPageParser.WriterCreatePage(context, "ServiceTemplate.ftl", pckPath, servicePath);
-			CommonPageParser.WriterCreatePage(context, "ControllerTemplate.ftl", pckPath, controllerPath);
-			CommonPageParser.WriterCreatePage(context, "MapperTemplate.ftl", "", sqlXmlPath);
-			CommonPageParser.WriterCreatePage(context, "ftlTemplate.ftl", "", ftlPath);
-			CommonPageParser.WriterCreatePage(context, "jsTemplate.ftl", "", jsPath);
+			result.add(entry+"表开始生成代码");
+			result.addAll(CommonPageParser.WriterCreatePage(context, "EntityTemplate.ftl", pckPath, modelPath));
+			result.addAll(CommonPageParser.WriterCreatePage(context, "EntityExampleTemplate.ftl", pckPath, modelExamplePath));
+			result.addAll(CommonPageParser.WriterCreatePage(context, "EntityDtoTemplate.ftl", pckPath, modelDtoPath));
+			result.addAll(CommonPageParser.WriterCreatePage(context, "DaoTemplate.ftl", pckPath, mapperPath));
+			result.addAll(CommonPageParser.WriterCreatePage(context, "ServiceTemplate.ftl", pckPath, servicePath));
+			result.addAll(CommonPageParser.WriterCreatePage(context, "ControllerTemplate.ftl", pckPath, controllerPath));
+			result.addAll(CommonPageParser.WriterCreatePage(context, "MapperTemplate.ftl", "", sqlXmlPath));
+			result.addAll(CommonPageParser.WriterCreatePage(context, "ftlTemplate.ftl", "", ftlPath));
+			result.addAll(CommonPageParser.WriterCreatePage(context, "jsTemplate.ftl", "", jsPath));
 		});
+		return result;
 	}
 }
