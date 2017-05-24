@@ -135,7 +135,7 @@ var ${lowClassName}Js = {
     // 查询table data
     queryDataTable:function () {
         <#noparse>$(</#noparse>'#tb_departments').bootstrapTable('refresh' , {
-            url: tempJs.getQueryTableLink(),
+            url: ${lowClassName}Js.getQueryTableLink(),
             query: <#noparse>$(</#noparse>'#formSearch').serialize()
         })
     },
