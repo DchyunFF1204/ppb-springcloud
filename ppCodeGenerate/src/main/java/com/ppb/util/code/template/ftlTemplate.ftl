@@ -6,13 +6,13 @@
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="static/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="static/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="static/assets/global/css/components.min.css">
-    <link rel="stylesheet" href="static/assets/global/css/plugins.min.css">
-    <link rel="stylesheet" href="static/assets/global/plugins/bootstrap-table/bootstrap-table.min.css">
-    <link rel="stylesheet" href="static/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css">
+    <link href="<#noparse>${staticDomain}</#noparse>/static/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="<#noparse>${staticDomain}</#noparse>/static/assets/global/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<#noparse>${staticDomain}</#noparse>/static/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="<#noparse>${staticDomain}</#noparse>/static/assets/global/css/components.min.css">
+    <link rel="stylesheet" href="<#noparse>${staticDomain}</#noparse>/static/assets/global/css/plugins.min.css">
+    <link rel="stylesheet" href="<#noparse>${staticDomain}</#noparse>/static/assets/global/plugins/bootstrap-table/bootstrap-table.min.css">
+    <link rel="stylesheet" href="<#noparse>${staticDomain}</#noparse>/static/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css">
 </head>
 <body>
 <div class="container-fluid">
@@ -110,13 +110,13 @@
         </div>
     </div>
 </div>
-<script src="static/assets/global/plugins/jquery.min.js"></script>
-<script src="static/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="static/assets/global/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="static/assets/global/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-<script src="static/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
-<script src="static/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script src="static/js/main/tool.js"></script>
-<script src="static/js/temp/${lowClassName}.js"></script>
+<script src="<#noparse>${staticDomain}</#noparse>/static/assets/global/plugins/jquery.min.js"></script>
+<script src="<#noparse>${staticDomain}</#noparse>/static/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="<#noparse>${staticDomain}</#noparse>/static/assets/global/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="<#noparse>${staticDomain}</#noparse>/static/assets/global/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="<#noparse>${staticDomain}</#noparse>/static/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="<#noparse>${staticDomain}</#noparse>/static/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="<#noparse>${staticDomain}</#noparse>/static/js/main/tool.js"></script>
+<script src="<#noparse>${staticDomain}</#noparse>/static/js/temp/${lowClassName}.js"></script>
 </body>
 </html>
