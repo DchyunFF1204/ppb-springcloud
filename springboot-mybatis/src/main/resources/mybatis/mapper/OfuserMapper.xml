@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ppb.mapper.OfuserMapper" > 
+
+	<!-- Result Map-->
+	<resultMap id="BaseResultMap" type="com.ppb.model.Ofuser" >
+		<result column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="plainPassword" property="plainpassword"/>
+		<result column="encryptedPassword" property="encryptedpassword"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="creationDate" property="creationdate"/>
+		<result column="modificationDate" property="modificationdate"/>
+		<result column="op_time" property="opTime"/>
+	</resultMap>
+	
+	<sql id="Example_Where_Clause">
+	    <where>
+	      <foreach collection="oredCriteria" item="criteria" separator="or">
+	        <if test="criteria.valid">
+	          <trim prefix="(" prefixOverrides="and" suffix=")">
+	            <foreach collection="criteria.criteria" item="criterion">
+	              <choose>
+	                <when test="criterion.noValue">
+	                  and ${criterion.condition}
+	                </when>
+	                <when test="criterion.singleValue">
+	                  and ${criterion.condition} #{criterion.value}
+	                </when>
+	                <when test="criterion.betweenValue">
+	                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+	                </when>
+	                <when test="criterion.listValue">
+	                  and ${criterion.condition}
+	                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+	                    #{listItem}
+	                  </foreach>
+	                </when>
+	              </choose>
+	            </foreach>
+	          </trim>
+	        </if>
+	      </foreach>
+	    </where>
+	  </sql>
+	  <sql id="Update_By_Example_Where_Clause">
+	    <where>
+	      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+	        <if test="criteria.valid">
+	          <trim prefix="(" prefixOverrides="and" suffix=")">
+	            <foreach collection="criteria.criteria" item="criterion">
+	              <choose>
+	                <when test="criterion.noValue">
+	                  and ${criterion.condition}
+	                </when>
+	                <when test="criterion.singleValue">
+	                  and ${criterion.condition} #{criterion.value}
+	                </when>
+	                <when test="criterion.betweenValue">
+	                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+	                </when>
+	                <when test="criterion.listValue">
+	                  and ${criterion.condition}
+	                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+	                    #{listItem}
+	                  </foreach>
+	                </when>
+	              </choose>
+	            </foreach>
+	          </trim>
+	        </if>
+	      </foreach>
+	    </where>
+	</sql>
+	
+
+
+	<!-- $!{tableName} table all fields -->
+	<sql id="Base_Column_List" >
+          id,
+          username,
+          plainPassword,
+          encryptedPassword,
+          name,
+          email,
+          creationDate,
+          modificationDate,
+          op_time
+	</sql>
+	
+	<select id="selectByExample" parameterType="com.ppb.model.OfuserExample" resultMap="BaseResultMap">
+	    select
+	    <if test="distinct">
+	      distinct
+	    </if>
+	    <include refid="Base_Column_List" />
+	    from ofuser
+	    <if test="_parameter != null">
+	      <include refid="Example_Where_Clause" />
+	    </if>
+	    <if test="orderByClause != null">
+	      order by ${orderByClause}
+	    </if>
+	 </select>
+	 
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from ofuser
+	    where id = #{id}
+	</select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+	    delete from ofuser
+	    where id = #{id}
+	</delete>
+	
+	
+  <delete id="deleteByExample" parameterType="com.ppb.model.OfuserExample">
+	    delete from ofuser
+	    <if test="_parameter != null">
+	      <include refid="Example_Where_Clause" />
+	    </if>
+  </delete>
+  
+  <insert id="insert" parameterType="com.ppb.model.Ofuser">
+    insert into ofuser (
+          id,
+          username,
+          plainPassword,
+          encryptedPassword,
+          name,
+          email,
+          creationDate,
+          modificationDate,
+          op_time
+      )
+    values (
+           #{id},
+           #{username},
+           #{plainpassword},
+           #{encryptedpassword},
+           #{name},
+           #{email},
+           #{creationdate},
+           #{modificationdate},
+          #{opTime}
+      )
+  </insert>
+  
+  
+  <insert id="insertSelective" parameterType="com.ppb.model.Ofuser">
+    insert into ofuser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+	        id,
+	    </if>
+        <if test="username != null">
+	        username,
+	    </if>
+        <if test="plainpassword != null">
+	        plainPassword,
+	    </if>
+        <if test="encryptedpassword != null">
+	        encryptedPassword,
+	    </if>
+        <if test="name != null">
+	        name,
+	    </if>
+        <if test="email != null">
+	        email,
+	    </if>
+        <if test="creationdate != null">
+	        creationDate,
+	    </if>
+        <if test="modificationdate != null">
+	        modificationDate,
+	    </if>
+        <if test="opTime != null">
+	        op_time,
+	    </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+	        #{id},
+	    </if>
+        <if test="username != null">
+	        #{username},
+	    </if>
+        <if test="plainpassword != null">
+	        #{plainpassword},
+	    </if>
+        <if test="encryptedpassword != null">
+	        #{encryptedpassword},
+	    </if>
+        <if test="name != null">
+	        #{name},
+	    </if>
+        <if test="email != null">
+	        #{email},
+	    </if>
+        <if test="creationdate != null">
+	        #{creationdate},
+	    </if>
+        <if test="modificationdate != null">
+	        #{modificationdate},
+	    </if>
+        <if test="opTime != null">
+	        #{opTime},
+	    </if>
+    </trim>
+  </insert>
+  
+  <select id="countByExample" parameterType="com.ppb.model.OfuserExample" resultType="java.lang.Integer">
+    select count(*) from ofuser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  <update id="updateByExampleSelective" parameterType="map">
+    update ofuser
+    <set>
+        <if test="record.id != null">
+	        id = #{record.id},
+	    </if>
+        <if test="record.username != null">
+	        username = #{record.username},
+	    </if>
+        <if test="record.plainpassword != null">
+	        plainPassword = #{record.plainpassword},
+	    </if>
+        <if test="record.encryptedpassword != null">
+	        encryptedPassword = #{record.encryptedpassword},
+	    </if>
+        <if test="record.name != null">
+	        name = #{record.name},
+	    </if>
+        <if test="record.email != null">
+	        email = #{record.email},
+	    </if>
+        <if test="record.creationdate != null">
+	        creationDate = #{record.creationdate},
+	    </if>
+        <if test="record.modificationdate != null">
+	        modificationDate = #{record.modificationdate},
+	    </if>
+        <if test="record.opTime != null">
+	        op_time = #{record.opTime},
+	    </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+   <update id="updateByExample" parameterType="map">
+    update ofuser
+    set 
+           id = #{id},
+           username = #{username},
+           plainPassword = #{plainpassword},
+           encryptedPassword = #{encryptedpassword},
+           name = #{name},
+           email = #{email},
+           creationDate = #{creationdate},
+           modificationDate = #{modificationdate},
+         op_time = #{opTime}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.ppb.model.Ofuser">
+    update ofuser
+    <set>
+        <if test="id != null">
+           id = #{id},
+        </if>
+        <if test="username != null">
+           username = #{username},
+        </if>
+        <if test="plainpassword != null">
+           plainPassword = #{plainpassword},
+        </if>
+        <if test="encryptedpassword != null">
+           encryptedPassword = #{encryptedpassword},
+        </if>
+        <if test="name != null">
+           name = #{name},
+        </if>
+        <if test="email != null">
+           email = #{email},
+        </if>
+        <if test="creationdate != null">
+           creationDate = #{creationdate},
+        </if>
+        <if test="modificationdate != null">
+           modificationDate = #{modificationdate},
+        </if>
+        <if test="opTime != null">
+           op_time = #{opTime},
+        </if>
+    </set>
+    where id = #{id}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.ppb.model.Ofuser">
+    update groupon_user
+    set 
+           id = #{id},
+
+           username = #{username},
+
+           plainPassword = #{plainpassword},
+
+           encryptedPassword = #{encryptedpassword},
+
+           name = #{name},
+
+           email = #{email},
+
+           creationDate = #{creationdate},
+
+           modificationDate = #{modificationdate},
+
+         op_time = #{opTime}
+    where id = #{id}
+  </update>
+
+</mapper>   
