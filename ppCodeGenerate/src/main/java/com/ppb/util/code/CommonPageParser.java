@@ -40,6 +40,7 @@ public class CommonPageParser {
 			}
 			else if (isReplace) {
 				log.info("替换文件:" + file.getAbsolutePath());
+				file.delete();
 			}
 			
 			freemarker.template.Template temp = configuration.getTemplate(templateName, pageEncoding);  

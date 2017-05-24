@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.commons.lang.StringUtils;
+import com.google.common.base.Strings;
 
 
 /**
@@ -45,7 +45,7 @@ public class ${className}Service {
         if(model != null){
             <#list feilds as fl>
             <#if fl.dataType == 'String'>
-            if(StringUtils.isNotBlank(model.get${fl.method}())){
+            if(Strings.isNullOrEmpty(model.get${fl.method}())){
                 criteria.and${fl.method}EqualTo(model.get${fl.method}());
             }
             <#else>

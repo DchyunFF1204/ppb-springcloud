@@ -1,6 +1,5 @@
 package ${entityPackage};
 
-import ${entityPackage}.${className};
 /**
  * 
  * <br>
@@ -8,7 +7,7 @@ import ${entityPackage}.${className};
  * <b>作者：</b>daizy<br>
  * <b>日期：</b> ${createDate} <br>
  */
-public class ${className}Dto extends {className} {
+public class ${className}Dto extends ${className} {
 	
 
 }
