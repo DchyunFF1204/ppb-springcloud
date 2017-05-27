@@ -20,6 +20,9 @@ import java.util.UUID;
 
 /**
  * IM 事件处理器
+ *
+ * 用户基于redis 缓存
+ *
  */
 @Component
 public class IMEventHandler {
@@ -50,7 +53,6 @@ public class IMEventHandler {
 				clientInfo.setLastconnecteddate(nowTime);
 				RedisHelper.getRedisInstance().set("",clientId, gson.toJson(clientInfo));
 			}
-			System.out.println("用户信息="+gson.toJson(clientInfo));
 			return gson.toJson(clientInfo);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,7 +64,6 @@ public class IMEventHandler {
     @OnDisconnect  
     public void onDisconnect(SocketIOClient client) {
 		String clientId = client.getHandshakeData().getSingleUrlParam("clientid");
-		System.out.println("客户端："+clientId);
 		ClientInfo clientInfo =  gson.fromJson(RedisHelper.getRedisInstance().get("",clientId),ClientInfo.class) ;
 		if (clientInfo != null){
 			clientInfo.setConnected((short)0);
@@ -75,7 +76,6 @@ public class IMEventHandler {
     //消息接收入口，收发消息
     @OnEvent(value="messageevent")
 	public void onEvent(SocketIOClient client, AckRequest request, MessageInfo data) {
-		System.out.println("消息："+gson.toJson(data));
 		String targetClientId = data.getTargetClientId();
 		ClientInfo clientInfo =gson.fromJson(RedisHelper.getRedisInstance().get("",targetClientId),ClientInfo.class);
 		if (clientInfo != null && clientInfo.getConnected() != 0) {

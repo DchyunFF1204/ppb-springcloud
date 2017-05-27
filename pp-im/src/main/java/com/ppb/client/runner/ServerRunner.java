@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by daizy on 2017/5/27.
+ *
+ * 当工程启动时  初始化启动SocketIo server
+ *
+ *
  */
 @Component
 public class ServerRunner implements CommandLineRunner {
@@ -22,7 +26,6 @@ public class ServerRunner implements CommandLineRunner {
     public ServerRunner(SocketIOServer server) {
         this.server = server;
     }
-
 
     @Override
     public void run(String... args) throws Exception {
